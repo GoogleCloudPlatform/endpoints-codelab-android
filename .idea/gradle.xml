@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/actionBarPullToRefresh" />
+            <option value="$PROJECT_DIR$/actionBarPullToRefreshextras" />
+            <option value="$PROJECT_DIR$/chuckbjonesSwipeToDismissUndoListec6bf93" />
+            <option value="$PROJECT_DIR$/todoTxtBackend" />
+            <option value="$PROJECT_DIR$/todoTxtTouch" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+    <option name="gradleVmOptions" value="-Xmx2048m -XX:MaxPermSize=512m" />
+  </component>
+</project>
+

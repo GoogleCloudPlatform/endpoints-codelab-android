@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="google-api-client-1.17.0-rc">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client/1.17.0-rc/f01974c9ec3e5570d8c75ecf7fce004e06757e03/google-api-client-1.17.0-rc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.api-client/google-api-client/1.17.0-rc/6c428b17d363d229b07fbf1e49cd7996ce2cbd77/google-api-client-1.17.0-rc-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

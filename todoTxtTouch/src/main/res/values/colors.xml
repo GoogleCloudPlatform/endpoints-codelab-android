@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Todo.txt, an Android app for managing your todo.txt file (http://todotxt.com).
+
+Copyright (c) 2009-2013 Todo.txt contributors (http://todotxt.com)
+
+LICENSE:
+
+Todo.txt is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any
+later version.
+
+Todo.txt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details.
+
+You should have received a copy of the GNU General Public License along with Todo.txt.  If not, see
+<http://www.gnu.org/licenses/>.
+
+@author Todo.txt contributors <todotxt@yahoogroups.com>
+@license http://www.gnu.org/licenses/gpl.html
+@copyright 2009-2013 Todo.txt contributors (http://todotxt.com)
+-->
+
+<resources>
+
+    <color name="green">#587058</color>
+    <color name="blue">#587498</color>
+    <color name="gold">#FFD800</color>
+    <color name="orange">#E86850</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#888888</color>
+    <color name="black_trans">#bb000000</color>
+
+    <!-- holo colors -->
+    <color name="activated_background">#33B5E5</color>
+
+    <!-- action bar colors -->
+    <color name="actionbar_label">#FF666666</color>
+    <color name="actionbar_btn_default_light">#FFFFFFFF</color>
+    <color name="actionbar_btn_default_dark">#FFCCCCCC</color>
+    <color name="actionbar_btn_default_stroke">#FFBBBBBB</color>
+    <color name="actionbar_btn_selected_stroke">#FFFFBB00</color>
+    <color name="actionbar_btn_pressed_light">#FFCCCCCC</color>
+    <color name="actionbar_btn_pressed_dark">#FF999999</color>
+    <color name="actionbar_btn_pressed_stroke">#FF999999</color>
+
+</resources><!--
+http://www.colorcombos.com/ 
+FFD800 gold
+587058 green
+587498 blue
+E86850 orange
+-->

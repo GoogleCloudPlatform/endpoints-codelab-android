@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/actionBarPullToRefresh/actionBarPullToRefresh.iml" filepath="$PROJECT_DIR$/actionBarPullToRefresh/actionBarPullToRefresh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/actionBarPullToRefreshextras/actionBarPullToRefreshextras.iml" filepath="$PROJECT_DIR$/actionBarPullToRefreshextras/actionBarPullToRefreshextras.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chuckbjonesSwipeToDismissUndoListec6bf93/chuckbjonesSwipeToDismissUndoListec6bf93.iml" filepath="$PROJECT_DIR$/chuckbjonesSwipeToDismissUndoListec6bf93/chuckbjonesSwipeToDismissUndoListec6bf93.iml" />
+      <module fileurl="file://$PROJECT_DIR$/todo.txt-android.iml" filepath="$PROJECT_DIR$/todo.txt-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/todoTxtBackend/todoTxtBackend.iml" filepath="$PROJECT_DIR$/todoTxtBackend/todoTxtBackend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/todoTxtTouch/todoTxtTouch.iml" filepath="$PROJECT_DIR$/todoTxtTouch/todoTxtTouch.iml" />
+    </modules>
+  </component>
+</project>
+

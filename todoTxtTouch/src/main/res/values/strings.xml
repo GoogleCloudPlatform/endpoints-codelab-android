@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Todo.txt, an Android app for managing your todo.txt file (http://todotxt.com).
+
+Copyright (c) 2009-2013 Todo.txt contributors (http://todotxt.com)
+
+LICENSE:
+
+Todo.txt is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any
+later version.
+
+Todo.txt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details.
+
+You should have received a copy of the GNU General Public License along with Todo.txt.  If not, see
+<http://www.gnu.org/licenses/>.
+
+@author Todo.txt contributors <todotxt@yahoogroups.com>
+@license http://www.gnu.org/licenses/gpl.html
+@copyright 2009-2013 Todo.txt contributors (http://todotxt.com)
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_label">Todo.txt</string>
+    <string name="added_task">Added tasks</string>
+    <string name="add_task_failed">Could not add task</string>
+    <string name="add_empty_task">Please enter task</string>
+    <string name="updated_task">Updated task</string>
+    <string name="update_task_failed">Could not update task</string>
+    <string name="sort">Sort</string>
+    <string name="sort_dialog_header">Sort tasks</string>
+    <string name="filter">Filter</string>
+    <string name="main_no_items">No tasks to display.</string>
+    <string name="set_preferences">Settings</string>
+    <string name="preferences">Settings</string>
+    <string name="sync">Sync</string>
+    <string name="search">Search</string>
+    <string name="refresh">Refresh</string>
+    <string name="add">Add</string>
+    <string name="addtask">Add tasks</string>
+    <string name="quickfilter">Quick filter</string>
+    <string name="nocontextsprojectsfilter">There are no contexts or projects in your todo.txt to filter on.</string>
+    <string name="updatetask">Update task</string>
+    <string name="complete">Complete</string>
+    <string name="priority">Prioritize</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="add_to_calendar">Schedule</string>
+    <string name="calendar_title">Todo.txt reminder</string>
+    <string name="archive">Archive</string>
+    <string name="unComplete">Undo complete</string>
+    <string name="swipe_action_complete">Completed task.</string>
+    <string name="swipe_action_unComplete">Marked task incomplete.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="clear">Clear</string>
+    <string name="selected">selected</string>
+    <string name="areyousure">Are you sure?</string>
+    <string name="tasktexthint0">Draft chapter 1 +Novel @typewriter\nCall literary agent @phone</string>
+    <string name="tasktexthint1">Learn to code +SelfEducation\nBuild a killer app @computer</string>
+    <string name="tasktexthint2">Take the road less traveled @Woods\nMake all the difference +Life</string>
+    <string name="tasktexthint3">Schedule chain mail fitting @castle\nSharpen sword +SelfPreservation</string>
+    <string name="tasktexthint4">Complete weekly review +GTD\nAchieve mind like water +GTD</string>
+    <string name="add_task_help">Enter a project into your task using the format +YourProject or a context using @YourContext.\n\n<b>Projects</b> start with a + sign and contain no spaces, like +WebsiteRedesign or
+		+Novel.\n\n<b>Contexts</b> (where or with what you will complete a task) start with an @ sign, like @phone or
+		@GroceryStore.</string>
+    <string name="addcontextproject">Add @context or +project</string>
+    <string name="assignpriority">Prioritize this task</string>
+    <string name="filterbycontextproject">Filter by @context or +project</string>
+    <string name="taskadded">Added task to todo.txt</string>
+
+    <!-- settings -->
+    <string name="auto_archive_pref_title">Auto archive</string>
+    <string name="auto_archive_pref_summary">Automatically archive complete tasks to done.txt.</string>
+    <string name="archive_now_title">Archive tasks</string>
+    <string name="archive_now_explainer">Move completed tasks to done.txt? This cannot be undone.</string>
+    <string name="dropbox_logout_pref_title">Log out</string>
+    <string name="dropbox_logout_pref_summary">Disconnect from Google Cloud Platform.</string>
+    <string name="dropbox_logout_explainer">Are you sure you wish to log out of Google Cloud Platform?</string>
+    <string name="dropbox_logout_warning">You have local changes to your todo.txt file! If you log out, they will be lost!</string>
+    <string name="todo_path_title">File location</string>
+    <string name="todo_path_summary">The Google Cloud Platform folder where todo.txt is stored.</string>
+    <string name="todo_path_warning">You have local changes to your todo.txt file! If you change the file location, they will be lost!</string>
+    <string name="todo_path_warning_override">I\'m feeling dangerous!</string>
+    <string name="todo_path_prev_folder">… Up to %s</string>
+    <string name="todo_path_add_new">Add new …</string>
+    <string name="todo_path_empty">Failed to load folder list from Google Cloud Platform</string>
+    <string name="todo_path_default">/todo</string>
+    <string name="dropbox_settings_header">Google Cloud Platform</string>
+    <string name="todotxt_settings_header">todo.txt</string>
+    <string name="about_settings_header">About</string>
+    <string name="prepend_date_pref_title">Date new tasks</string>
+    <string name="prepend_date_pref_summary">Automatically add creation date to new tasks.</string>
+    <string name="periodic_sync_pref_title">Sync automatically</string>
+
+    <!-- sync dialog -->
+    <string name="sync_dialog_title">Manual Sync</string>
+    <string name="sync_dialog_msg">Do you want to upload or download your todo.txt file?</string>
+    <string name="sync_dialog_upload">Upload to Google Cloud Platform</string>
+    <string name="sync_dialog_download">Download to device</string>
+    <string name="sync_upload_message">Uploading todo.txt…</string>
+    <string name="sync_download_message">Downloading todo.txt…</string>
+    <!-- sync conflict dialog -->
+    <string name="sync_conflict_dialog_title">File Conflict</string>
+    <string name="sync_conflict_dialog_msg">Oops! There is a newer version of your todo.txt file in Google Cloud Platform. \nDo you want to upload your local changes, or download the Google Cloud Platform version?</string>
+    <!-- login -->
+    <string name="welcome_message">Welcome to Todo.txt</string>
+    <string name="login_screen_button">Connect to Google Cloud Platform</string>
+    <!-- delete -->
+    <string name="delete_task_title">Delete task</string>
+    <string name="delete_task_message">This cannot be undone. Are you sure?</string>
+    <string name="delete_task_confirm">Delete</string>
+    <!-- search -->
+    <string name="search_hint">Search todo.txt</string>
+    <!-- filter tabs -->
+    <string name="filter_tab_priorities">Priority</string>
+    <string name="filter_tab_projects">Project</string>
+    <string name="filter_tab_contexts">Context</string>
+    <string name="filter_tab_search">Keyword</string>
+    <!-- title bar changes -->
+    <string name="title_search_results">Search term: </string>
+    <string name="title_filter_applied">Filtered by: </string>
+    <string name="add_task_priority_btn">Priority</string>
+    <string name="add_task_context_btn">Context</string>
+    <string name="add_task_project_btn">Project</string>
+    <string name="add_task_help_btn">Help</string>
+    <string name="priority_prompt">Priority</string>
+    <string name="project_prompt">Project</string>
+    <string name="context_prompt">Context</string>
+    <string name="refine">Refine</string>
+    <string name="separator">Separator</string>
+    <string name="contextproject_prompt">Contexts and projects</string>
+
+    <!-- launcher shortcut -->
+    <string name="shortcut_addtask_name">Add Task</string>
+    <!-- share -->
+    <string name="share_addtask_name">Add to Todo.txt</string>
+    <string name="share_subject">Todo.txt task</string>
+    <string name="share_title">Share</string>
+
+    <!-- online/offline toasts -->
+    <string name="toast_login_notconnected">Cannot log in:\nNo internet connection.</string>
+    <string name="toast_notconnected">No internet connection: Cannot sync with Google Cloud Platform right now.</string>
+
+    <!-- Relative Dates -->
+    <string name="dates_days_ago">%d days ago</string>
+    <string name="dates_one_day_ago">1 day ago</string>
+    <string name="dates_today">today</string>
+    <string name="dates_months_ago">%d months ago</string>
+    <string name="dates_one_month_ago">1 month ago</string>
+
+    <!-- contextual action bar progress and error messages -->
+    <string name="progress_uncomplete">Marking task incomplete</string>
+    <string name="progress_complete">Marking task complete</string>
+    <string name="progress_archive">Archiving tasks</string>
+    <string name="progress_delete">Deleting</string>
+    <string name="progress_prioritize">Prioritizing tasks</string>
+    <string name="confirm_archive">Archived completed tasks</string>
+    <string name="select_priority">Select priority</string>
+    <string name="error_prioritize">Could not prioritize tasks</string>
+    <string name="error_uncomplete">Could not mark tasks as not completed</string>
+    <string name="error_complete">Could not complete tasks</string>
+    <string name="error_delete">Could not delete tasks</string>
+    <string name="error_archive">Could not archive tasks</string>
+    <string name="wait_progress">Please wait&#8230;</string>
+
+    <!-- pull-to-refresh -->
+    <string name="pull_to_refresh">Pull to refresh</string>
+    <string name="syncing">Syncing with Google Cloud Platform…</string>
+
+    <!-- path activity -->
+    <string name="discard">Discard</string>
+    <string name="done">Done</string>
+
+</resources>

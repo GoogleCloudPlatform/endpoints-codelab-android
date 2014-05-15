@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="taskApi-v1-1.17.0-rc-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/todotxt/backend/taskApi/v1-1.17.0-rc-SNAPSHOT/taskApi-v1-1.17.0-rc-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

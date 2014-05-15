@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is part of Todo.txt, an Android app for managing your todo.txt file (http://todotxt.com).
+
+Copyright (c) 2009-2013 Todo.txt contributors (http://todotxt.com)
+
+LICENSE:
+
+Todo.txt is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any
+later version.
+
+Todo.txt is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details.
+
+You should have received a copy of the GNU General Public License along with Todo.txt.  If not, see
+<http://www.gnu.org/licenses/>.
+
+@author Todo.txt contributors <todotxt@yahoogroups.com>
+@license http://www.gnu.org/licenses/gpl.html
+@copyright 2009-2013 Todo.txt contributors (http://todotxt.com)
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/add_new"
+        android:icon="@drawable/ic_action_add"
+        android:showAsAction="always"
+        android:title="@string/addtask"/>
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="always"
+        android:title="@string/search"/>
+    <item
+        android:id="@+id/sort"
+        android:icon="@drawable/collections_sort_by_size"
+        android:showAsAction="ifRoom"
+        android:title="@string/sort"/>
+    <!--
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/menu_filter"
+        android:showAsAction="never"
+        android:title="@string/filter"/>
+    -->
+    <item
+        android:id="@+id/sync"
+        android:icon="@drawable/ic_action_sync"
+        android:showAsAction="never"
+        android:title="@string/sync"/>
+    <item
+        android:id="@+id/archive"
+        android:icon="@drawable/ic_action_archive"
+        android:showAsAction="never"
+        android:title="@string/archive"/>
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/social_share"
+        android:showAsAction="never"
+        android:title="@string/share"/>
+    <item
+        android:id="@+id/preferences"
+        android:icon="@drawable/action_settings"
+        android:showAsAction="never"
+        android:title="@string/preferences"/>
+
+</menu>

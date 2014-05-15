@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="libphonenumber-4.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/todoTxtTouch/libs/libphonenumber-4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
