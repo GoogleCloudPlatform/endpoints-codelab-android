@@ -2,14 +2,34 @@
 
 *May 2014*
 
-This codelab is an introduction to Google Cloud Endpoints, the technology that enables the publication of RESTful APIs which can easily be consumed by Android applications. We will start from an existing mobile Android application and connect it to a brand new backend powered by Cloud Endpoints. All development will be done with the Android Studio IDE.
+This codelab is an introduction to Google Cloud Endpoints, the technology that enables the publication of RESTful APIs which can easily be consumed by Android applications. We will start from an existing mobile Android application and connect it to a brand new backend powered by Cloud Endpoints. All development are done with the Android Studio IDE.
 
 The original github repository for this codelab is here: [https://github.com/GoogleCloudPlatform/endpoints-codelab-android/](https://github.com/GoogleCloudPlatform/endpoints-codelab-android/)
+
+##Table of Contents
+
+- [Android Endpoints "Todo.txt" CodeLab](#user-content-android-endpoints-todotxt-codelab)
+    - [Codelab Requirements](#user-content-codelab-requirements)
+    - [Introduction](#user-content-introduction)
+        - [The Todo.txt application](#user-content-the-todotxt-application)
+        - [Android Studio - the integrated tool](#user-content-android-studio---the-integrated-tool)
+        - [Google Cloud Endpoints - where the magic happens](#user-content-google-cloud-endpoints---where-the-magic-happens)
+        - [Overall codelab architecture](#user-content-overall-codelab-architecture)
+    - [Step 0 - Create your own project in the Google Developers Console](#user-content-step-0---create-your-own-project-in-the-google-developers-console)
+    - [Step 1 - Get the Android application source code](#user-content-step-1---get-the-android-application-source-code)
+    - [Step 2 - Create the endpoints backend project](#user-content-step-2---create-the-endpoints-backend-project)
+    - [Step 3 - Implement reading and writing tasks to the Datastore](#user-content-step-3---implement-reading-and-writing-tasks-to-the-datastore)
+    - [Step 4 - Install Java Client Libraries, add dependency to Android project](#user-content-step-4---install-java-client-libraries-add-dependency-to-android-project)
+    - [Step 5 - Modify the android application to use the new backend. Run. Test.](#user-content-step-5---modify-the-android-application-to-use-the-new-backend-run-test)
+    - [Step 6 - Escape to the command line and deploy to production!](#user-content-step-5-escape-to-the-command-line-and-deploy-to-production)
+    - [Step 7 - Improve the application!](#user-content-step-6-improve-the-application)
+    - [Appendix - Using the APIs Explorer](#user-content-appendix---using-the-apis-explorer)
+    - [Appendix - Looking around the App Engine Console](#user-content-appendix---looking-around-the-app-engine-console)
 
 ## Codelab Requirements
 
 * A reasonably-powered laptop with plenty of RAM
-    * Please avoid ultrabooks! Sorry, also no chromebooks ATM
+    * please avoid ultrabooks! sorry, also no chromebooks ATM
 * A Java Development Kit (**JDK, not JRE**), version 7 (Java 7)
 * Latest **[Android Studio](http://developer.android.com/sdk/installing/studio.html#download)**
     * **The Android Emulator**
@@ -30,7 +50,7 @@ The original github repository for this codelab is here: [https://github.com/Goo
 
 ![image alt text](images/image_0.png)
 
-Todo.txt is an Android application [available from the Play Store](https://play.google.com/store/apps/details?id=com.todotxt.todotxttouch) that stores tasks in the Cloud. It's simple to understand and use, has great user ratings and, best of all, is open sourced with full code available on GitHub at [https://github.com/ginatrapani/todo.txt-android](https://github.com/ginatrapani/todo.txt-android).
+Todo.txt is an Android application [available from the Play Store](https://play.google.com/store/apps/details?id=com.todotxt.todotxttouch) that stores tasks in the Cloud. It's simple to understand and use, has great user ratings and, best of all, is open sourced with full code available on github at [https://github.com/ginatrapani/todo.txt-android](https://github.com/ginatrapani/todo.txt-android).
 
 In this code lab we will use a single development environment (Android Studio) to build a brand new Google Cloud Platform backend to store user tasks, thus replacing the existing Cloud provider.
 
@@ -673,7 +693,7 @@ Chances are you are not alone developing the project and this section lets you i
 The Google App Engine console is further documented here: [https://developers.google.com/appengine/docs/adminconsole/index](https://developers.google.com/appengine/docs/adminconsole/index)
 
 
-**Table of Contents**
+##Table of Contents
 
 - [Android Endpoints "Todo.txt" CodeLab](#user-content-android-endpoints-todotxt-codelab)
     - [Codelab Requirements](#user-content-codelab-requirements)
@@ -689,11 +709,6 @@ The Google App Engine console is further documented here: [https://developers.go
     - [Step 4 - Install Java Client Libraries, add dependency to Android project](#user-content-step-4---install-java-client-libraries-add-dependency-to-android-project)
     - [Step 5 - Modify the android application to use the new backend. Run. Test.](#user-content-step-5---modify-the-android-application-to-use-the-new-backend-run-test)
     - [Step 6 - Escape to the command line and deploy to production!](#user-content-step-5-escape-to-the-command-line-and-deploy-to-production)
-    - [Step 7 Improve the application!](#user-content-step-6-improve-the-application)
+    - [Step 7 - Improve the application!](#user-content-step-6-improve-the-application)
     - [Appendix - Using the APIs Explorer](#user-content-appendix---using-the-apis-explorer)
     - [Appendix - Looking around the App Engine Console](#user-content-appendix---looking-around-the-app-engine-console)
-        - [Dashboard](#user-content-dashboard)
-        - [Logs](#user-content-logs)
-        - [Versions](#user-content-versions)
-        - [Settings](#user-content-settings)
-        - [Permissions](#user-content-permissions)
