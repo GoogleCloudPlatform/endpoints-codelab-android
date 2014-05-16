@@ -4,6 +4,8 @@
 
 This codelab is an introduction to Google Cloud Endpoints, the technology that enables the publication of RESTful APIs which can easily be consumed by Android applications. We will start from an existing mobile Android application and connect it to a brand new backend powered by Cloud Endpoints. All development will be done with the Android Studio IDE.
 
+The original github repository for this codelab is here: [https://github.com/GoogleCloudPlatform/endpoints-codelab-android/](https://github.com/GoogleCloudPlatform/endpoints-codelab-android/)
+
 ## Codelab Requirements
 
 * A reasonably-powered laptop with plenty of RAM
@@ -69,10 +71,10 @@ In Java, using `@Api`, `@ApiMethod` and associated attributes enables you to dec
 @Api(name = "myApi", version = "v1")
 public class MyEndpoint {
 
-  @ApiMethod(name = "helloWorld")
-  public String hello() {
-    return "Hello World!";
-  }
+    @ApiMethod(name = "helloWorld")
+    public String hello() {
+        return "Hello World!";
+    }
 
 }
 ```
@@ -520,7 +522,7 @@ Once started, you can start using the application to add tasks, mark them as com
 
 ![image alt text](images/image_32.png)
 
-## Step 5. Escape to the command line and deploy to production!
+## Step 6 - Escape to the command line and deploy to production!
 
 While we've been comfortably sitting in an IDE throughout the development of both the client and the server sides of this codelab, everything was actually handled by the Gradle build tool under the covers and thus we can easily escape to a command-line or to another tool (such as a continuous integration server).
 
@@ -607,7 +609,7 @@ The current synchronisation implementation will fetch tasks from local storage s
 
 As you can see in the screenshot above a query of `TaskBean` entities in the Cloud Datastore returns the list of tasks in our new Android Todo.txt application!
 
-## Step 6. Improve the application!
+## Step 7 - Improve the application!
 
 Believe it or not, this application is not quite perfect!
 Here are a few ideas to enhance the code and the user experience : 
@@ -669,3 +671,29 @@ Finally you can configure serving the application from a custom domain, disable 
 Chances are you are not alone developing the project and this section lets you invite other participants with three role levels: Owner, Developer, and Viewer.
 
 The Google App Engine console is further documented here: [https://developers.google.com/appengine/docs/adminconsole/index](https://developers.google.com/appengine/docs/adminconsole/index)
+
+
+**Table of Contents**
+
+- [Android Endpoints "Todo.txt" CodeLab](#user-content-android-endpoints-todotxt-codelab)
+    - [Codelab Requirements](#user-content-codelab-requirements)
+    - [Introduction](#user-content-introduction)
+        - [The Todo.txt application](#user-content-the-todotxt-application)
+        - [Android Studio - the integrated tool](#user-content-android-studio---the-integrated-tool)
+        - [Google Cloud Endpoints - where the magic happens](#user-content-google-cloud-endpoints---where-the-magic-happens)
+        - [Overall codelab architecture](#user-content-overall-codelab-architecture)
+    - [Step 0 - Create your own project in the Google Developers Console](#user-content-step-0---create-your-own-project-in-the-google-developers-console)
+    - [Step 1 - Get the Android application source code](#user-content-step-1---get-the-android-application-source-code)
+    - [Step 2 - Create the endpoints backend project](#user-content-step-2---create-the-endpoints-backend-project)
+    - [Step 3 - Implement reading and writing tasks to the Datastore](#user-content-step-3---implement-reading-and-writing-tasks-to-the-datastore)
+    - [Step 4 - Install Java Client Libraries, add dependency to Android project](#user-content-step-4---install-java-client-libraries-add-dependency-to-android-project)
+    - [Step 5 - Modify the android application to use the new backend. Run. Test.](#user-content-step-5---modify-the-android-application-to-use-the-new-backend-run-test)
+    - [Step 6 - Escape to the command line and deploy to production!](#user-content-step-5-escape-to-the-command-line-and-deploy-to-production)
+    - [Step 7 Improve the application!](#user-content-step-6-improve-the-application)
+    - [Appendix - Using the APIs Explorer](#user-content-appendix---using-the-apis-explorer)
+    - [Appendix - Looking around the App Engine Console](#user-content-appendix---looking-around-the-app-engine-console)
+        - [Dashboard](#user-content-dashboard)
+        - [Logs](#user-content-logs)
+        - [Versions](#user-content-versions)
+        - [Settings](#user-content-settings)
+        - [Permissions](#user-content-permissions)
