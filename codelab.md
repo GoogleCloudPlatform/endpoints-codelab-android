@@ -84,7 +84,7 @@ public class MyEndpoint {
 
 The following HTTP request will be mapped to a call to the above `hello()` method : 
 
-`HTTP GET https://<app_id>.appspot.com/_ah/api/myApi/v1/helloWorld`
+`HTTP GET https://<project_id>.appspot.com/_ah/api/myApi/v1/helloWorld`
 
 Luckily, as we will see, the Endpoints technology comes with the ability to generate Android clients to avoid having to deal with HTTP request construction and json response parsing.
 
@@ -103,7 +103,7 @@ Let's get going!
 
 ## Step 0 - Create your own project in the Google Developers Console
 
-Point your browser to the [developers console](https://console.developers.google.com/) ([https://console.developers.google.com/](https://console.developers.google.com/)) and create a new project (login first if required) :
+Point your browser to the [developers console](https://console.developers.google.com/) and create a new project (login first if required) :
 
 ![image alt text](images/image_6.png)   ![image alt text](images/image_7.png)
 
@@ -129,7 +129,7 @@ Open Android Studio and import the code as a new project. Remember, this needs t
 This should trigger a successful (Gradle) build :
 ![image alt text](images/image_11.png)
 
-If the build fails, make sure you have the **Support Repository** installed (see last paragraph of [http://developer.android.com/sdk/installing/studio.html](http://developer.android.com/sdk/installing/studio.html) for details).
+> If the build fails, make sure you have the **Support Repository** installed (see last paragraph of [http://developer.android.com/sdk/installing/studio.html](http://developer.android.com/sdk/installing/studio.html) for details).
 
 From here we'll create, build and test the backend before we make our way back to the Android client to hook it up to this new backend.
 
@@ -138,7 +138,7 @@ From here we'll create, build and test the backend before we make our way back t
 
 Android Studio has built-in support for Google Cloud Endpoints.
 
-Simply go to: **Tools > Google Cloud Tools > Add App Engine backend**
+To add a backend to the current Android project, simply go to: **Tools > Google Cloud Tools > Add App Engine backend**
 
 ![image alt text](images/image_12.png)
 
@@ -149,9 +149,7 @@ Make sure you select the "App Engine Java **Endpoints** Module" template and use
 
 ![image alt text](images/image_13.png)
 
-This creates a new backend module for this Android Studio project and adds it as an additional dependency in the **settings.gradle** file.
-
-The generated code is pretty straight-forward with an object model for the data manipulated by the endpoint and the actual endpoint implementation :
+This creates a new backend module for this Android Studio project and adds it as an additional dependency in the `settings.gradle` file.The generated code is pretty straight-forward with an object model for the data manipulated by the endpoint and the actual endpoint implementation :
 
 ![image alt text](images/image_14.png)
 
@@ -163,15 +161,14 @@ The generated code is pretty straight-forward with an object model for the data 
                                packagePath = ""))
 public class MyEndpoint {
 
-  @ApiMethod(name = "sayHi")
-  public MyBean sayHi(@Named("name") String name) {
-    MyBean response = new MyBean();
-    response.setData("Hi, " + name);
-    return response;
-  }
+        @ApiMethod(name = "sayHi")
+        public MyBean sayHi(@Named("name") String name) {
+        MyBean response = new MyBean();
+        response.setData("Hi, " + name);
+        return response;
+    }
 
 }
-
 ```
 
 An HTTP POST request to `myApi/v1/sayHi/Test` will be routed to the `sayHi()` method and `"Test"` will be mapped to the `name` attribute.
@@ -187,7 +184,6 @@ Without making any changes for the time being, simply start the development app 
 ![image alt text](images/image_15.png)  ![image alt text](images/image_16.png)
 
 > If you see a red cross on the module, this means that either :
-> 
 > * you do not have a Java 7 setting for the project. You'll need to update this in :
 > **File > Project Structure > SDK Location > JDK location**.
 > * you have to build the module first to bring in all the dependencies (such as the App Engine SDK). Simply **Build > Make module 'todoTxtBackend'**.
@@ -195,13 +191,11 @@ Without making any changes for the time being, simply start the development app 
 Once the development app server has started you should see this log message  :
 
 ```
-
 INFO: Module instance default is running at http://localhost:8080/
 com.google.appengine.tools.development.AbstractModule startup
 INFO: The admin console is running at http://localhost:8080/_ah/admin
 com.google.appengine.tools.development.DevAppServerImpl doStart
 INFO: Dev App Server is now running
-
 ```
 
 You can then point your browser to [http://localhost:8080](http://localhost:8080) to exercise the sample endpoints functionality or more interestingly go to [http://localhost:8080/_ah/api/explorer](http://localhost:8080/_ah/api/explorer) to use the Google API Explorer tool which you may already be familiar with if you've used in the past any public Google API. See the "Using the APIs Explorer" Appendix at the end of this document for further details.
@@ -235,35 +229,31 @@ public class TaskBean {
     public String getData() { return myData; }
     public void setData(String data) { myData = data; }
 }
-
 ```
 
 In `MyEndpoint.java`, change the name of the endpoint from `"myApi"` to `"TaskApi"`. Notice how a tooltip indicates that this is not a recommended name (names should not be capitalized). Consequently, change it to `"taskApi"` :
 
 ![image alt text](images/image_19.png)
 
-This suggestion is one of a set of Endpoints-related inspections which you can find in the project properties :
+This suggestion is one of a set of Endpoints-related inspections in Android Studio which you can find in the project properties :
 
 ![image alt text](images/image_20.png)
 
-Remove the default `sayHi()` method and add these three methods and associated annotations (you can either copy/paste from this document or use the `MyEndpoint.java` file located in the `snippets/` directory of the archive for this codelab) :
+Remove the default `sayHi()` method and add these three methods and associated annotations (you can either copy/paste from this document or use the `MyEndpoint.java` file located in the [`snippets/` directory TODO]() of the archive for this codelab) :
 
-The following `storeTask` method will be invoked when the following HTTP request is received: `POST https://<app_id>.appspot.com/_ah/api/taskApi/v1/storeTask`
+The following `storeTask` method will be invoked when the following HTTP request is received: `POST https://<project_id>.appspot.com/_ah/api/taskApi/v1/storeTask`
 
 Note how the `@Api` and `@ApiMethod` attributes are used to build this URI. The mapping from a POST request is implicit again here because we're passing the method a parameter (of type `TaskBean`). This parameter is exchanged on the wire in json format (as a simple pair of `data` and `id` attribute values) and marshalled in and out of Java directly by Cloud Endpoints.
 
 ```java
 
 @ApiMethod(name = "storeTask")
-public void **storeTask**(TaskBean taskBean) {
-    DatastoreService datastoreService =
-        DatastoreServiceFactory.*getDatastoreService*();
+public void storeTask(TaskBean taskBean) {
+    DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
     Transaction txn = datastoreService.beginTransaction();
     try {
-        Key taskBeanParentKey = 
-            KeyFactory.*createKey*("TaskBeanParent", "todo.txt");
-        Entity taskEntity = 
-            new Entity("TaskBean", taskBean.getId(), taskBeanParentKey);
+        Key taskBeanParentKey = KeyFactory.createKey("TaskBeanParent", "todo.txt");
+        Entity taskEntity = new Entity("TaskBean", taskBean.getId(), taskBeanParentKey);
         taskEntity.setProperty("data", taskBean.getData());
         datastoreService.put(taskEntity);
         txn.commit();
@@ -273,12 +263,11 @@ public void **storeTask**(TaskBean taskBean) {
         }
     }
 }
-
 ```
 
 This next `getTasks()` method is invoked when this HTTP request is received :
 
-`GET https://<app_id>.appspot.com/_ah/api/taskApi/v1/taskbeancollection`
+`GET https://<project_id>.appspot.com/_ah/api/taskApi/v1/taskbeancollection`
 
 This time we're responding to a GET operation because the method takes no parameter and starts with `get` and thus it should be safe to assume that all such request will be idempotent (i.e. it will not change the server state).
 
@@ -286,14 +275,10 @@ This time we're responding to a GET operation because the method takes no parame
 
 @ApiMethod(name = "getTasks")
 public List<TaskBean> getTasks() {
-    DatastoreService datastoreService = 
-        DatastoreServiceFactory.getDatastoreService();
-    Key taskBeanParentKey = 
-        KeyFactory.createKey("TaskBeanParent", "todo.txt");
+    DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+    Key taskBeanParentKey = KeyFactory.createKey("TaskBeanParent", "todo.txt");
     Query query = new Query(taskBeanParentKey);
-    List<Entity> results =
-        datastoreService.prepare(query)
-            .asList(FetchOptions.Builder.withDefaults());
+    List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
     ArrayList<TaskBean> taskBeans = new ArrayList<TaskBean>();
     for (Entity result : results) {
         TaskBean taskBean = new TaskBean();
@@ -304,27 +289,22 @@ public List<TaskBean> getTasks() {
 
     return taskBeans;
 }
-
 ```
 
 This third and final `clearTasks()` method is called on this HTTP request :
 
-`POST https://<app_id>.appspot.com/_ah/api/taskApi/v1/clearTasks`
+`POST https://<project_id>.appspot.com/_ah/api/taskApi/v1/clearTasks`
 
 ```java
 
 @ApiMethod(name = "clearTasks")
-public void **clearTasks**() {
-    DatastoreService datastoreService =
-        DatastoreServiceFactory.*getDatastoreService*();
+public void clearTasks() {
+    DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
     Transaction txn = datastoreService.beginTransaction();
     try {
-        Key taskBeanParentKey = 
-            KeyFactory.*createKey*("TaskBeanParent", "todo.txt");
+        Key taskBeanParentKey = KeyFactory.createKey("TaskBeanParent", "todo.txt");
         Query query = new Query(taskBeanParentKey);
-        List<Entity> results = 
-            datastoreService.prepare(query)
-                .asList(FetchOptions.Builder.*withDefaults*());
+        List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
         for (Entity result : results) {
             datastoreService.delete(result.getKey());
         }
@@ -333,7 +313,6 @@ public void **clearTasks**() {
         if (txn.isActive()) { txn.rollback(); }
     }
 }
-
 ```
 
 This method clearly does modify the server state and thus its name does not start with `get`. An HTTP POST is required to call this method. Another common RESTful request is the use of HTTP PUT but in our case we're never modifying existing data.
@@ -355,10 +334,9 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Transaction;
 import java.util.ArrayList;
 import java.util.List;
-
 ```
 
-These three methods all manipulate instances of `TaskBean` to store, read and delete tasks from the Datastore. Getting a hold of the Datastore is as easy as calling a factory method. `TaskBean` instances need to be turned into Entity instances with a hard-coded `"todo.txt"` key and appropriate attributes before they can be read from or wrote into the Datastore. Writing and deleting happens within the boundaries of a transaction.
+These three methods all manipulate instances of `TaskBean` to store, read and delete tasks from the Datastore. Getting a hold of the Datastore is as easy as calling a factory method. `TaskBean` instances need to be turned into Entity instances with a hard-coded `"todo.txt"` key and appropriate attributes before they can be read from or wrote into the Cloud Datastore. Writing and deleting happens within the boundaries of a transaction.
 
 At this point we have a fully functional backend exposing three methods to store, read and delete tasks in the highly-scalable Cloud Datastore, all through the Cloud Endpoints technology.
 
@@ -371,21 +349,19 @@ While exposing standard RESTful interfaces makes it possible to access them from
 
 ![image alt text](images/image_22.png)
 
-This will scan the project for Cloud Endpoints artifacts (our `MyEndpoint` class here), generate the appropriate client library and install it into the local maven repository, thus making them available to the client Android application.
+This will scan the project for Cloud Endpoints artifacts (our `MyEndpoint` class here), generate the appropriate client library and install it into the local maven repository, thus making them accessible to the client Android application.
 
 ![image alt text](images/image_23.png)
 
 If you are curious, the generated code is placed in the project's `build/client-libs/taskApi-v1-java.zip` and contains the following files (the names are derived from the endpoint name) : 
 
 ```
-
 taskApi/TaskApiScopes.java
 taskApi/model/TaskBean.java
 taskApi/model/TaskBeanCollection.java
 taskApi/TaskApi.java
 taskApi/TaskApiRequest.java
 taskApi/TaskApiRequestInitializer.java
-
 ```
 
 We'll see in the next step how to use these classes from within the Android application.
@@ -402,24 +378,19 @@ compile('com.google.http-client:google-http-client-android:1.18.0-rc') {
     exclude(group: 'com.google.android', module: 'android')
     exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
 }
-
 ```
 
-If required, the complete `build.gradle` file for `todoTxtTouch` is located in the [`snippets/` directory TODO]() of the codelab archive.
-
-Once you've made this change, you'll be prompted to perform a "gradle sync" :
+If required, the complete `build.gradle` file for `todoTxtTouch` is located in the [`snippets/` directory TODO]() of the codelab archive. Once you've made this change, you'll be prompted to perform a **"gradle sync"** :
 
 ![image alt text](images/image_24.png)
 
-At this point the Android client application is ready to start using the Endpoints client library to store tasks in our Google Cloud backend.
-
-Further documentation on how to consume the Cloud Endpoints in Android is here: [https://developers.google.com/appengine/docs/java/endpoints/consume_android](https://developers.google.com/appengine/docs/java/endpoints/consume_android).
+At this point the Android client application is ready to start using the Endpoints client library to store tasks in our Google Cloud backend. Further documentation on how to consume the Cloud Endpoints in Android is here: [https://developers.google.com/appengine/docs/java/endpoints/consume_android](https://developers.google.com/appengine/docs/java/endpoints/consume_android).
 
 ## Step 5 - Modify the android application to use the new backend. Run. Test.
 
-Navigate to the `com.todotxt.todotxttouch.task.TaskBagImpl.java` class in the `todoTxtTouch` module (it may be one of the tabs already open) and navigate to line 215 (using **Navigate > Line** should get you to `/* REMOTE APIS */`). This is the interesting part: the `pushToRemote` and `pullToRemote` methods implement the actual communication with the backend which we want to set to use the Google Cloud Platform. 
+Navigate to the `com/todotxt/todotxttouch/task/TaskBagImpl.java` file in the `todoTxtTouch` module (it may be one of the tabs already open) and navigate to line 215 (using **Navigate > Line** should get you to `/* REMOTE APIS */`).
 
-Rather than making changes to this existing class we'll create a new subclass of `TaskBagImpl` called `EndpointsTaskBagImpl` (full source [here_TODO]()) :
+This is the interesting part: the `pushToRemote` and `pullToRemote` methods implement the actual communication with the backend which we want to set to use the Google Cloud Platform. Rather than making changes to this existing class we'll create a new subclass of `TaskBagImpl` called `EndpointsTaskBagImpl` (full source [here_TODO]()) :
 
 ![image alt text](images/image_25.png)![image alt text](images/image_26.png)
 
@@ -428,36 +399,32 @@ Rather than making changes to this existing class we'll create a new subclass of
 package com.todotxt.todotxttouch.task;
 
 public class EndpointsTaskBagImpl extends TaskBagImpl {
-  final TaskApi taskApiService;
+    final TaskApi taskApiService;
 
-  // Constructor
-  public EndpointsTaskBagImpl (TodoPreferences preferences,
-                               LocalTaskRepository localRepository) {
-    super(preferences, localRepository, null);
-    TaskApi.Builder builder =
-      new TaskApi.Builder(AndroidHttp.*newCompatibleTransport*(), 
-        new AndroidJsonFactory(), null)
-        .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-        .setGoogleClientRequestInitializer(
-          new GoogleClientRequestInitializer() {
-            @Override
-            public void initialize(
-              AbstractGoogleClientRequest<?> abstractGoogleClientRequest) 
-              throws IOException {
-                abstractGoogleClientRequest.setDisableGZipContent(true);
-              }
-            }
+    // Constructor
+    public EndpointsTaskBagImpl (TodoPreferences preferences, LocalTaskRepository localRepository) {
+        super(preferences, localRepository, null);
+        TaskApi.Builder builder = new TaskApi.Builder(AndroidHttp.newCompatibleTransport(), 
+            new AndroidJsonFactory(), null)
+                .setRootUrl("http://10.0.2.2:8080/_ah/api/")
+                .setGoogleClientRequestInitializer( new GoogleClientRequestInitializer() {
+                    @Override
+                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+                        abstractGoogleClientRequest.setDisableGZipContent(true);
+                    }
+                }
 
-          );
+            );
         taskApiService = builder.build();
-    } // end of constructor, other methods to follow in this class
-
+    } // end of constructor, other methods to follow in this class...
 ```
 
 This constructor above sets up a development environment by initializing the `TaskApi` instance to enable testing with the local development app server and the local Android emulator. As we'll see later, the initialization for the production code is somewhat simpler.
 
 > If you were to run it on a real device, here are the required changes :
+>
 > 1. edit the `todoTxtBackend` run configuration to listen on 0.0.0.0 (default is 127.0.0.1)
+>
 > 2. replace 10.0.2.2 with LAN ip address of the laptop
 
 The other two methods for the class are the new overridden `pushToRemote` and `pullFromRemote` methods.
@@ -467,31 +434,26 @@ These methods use the `taskApiService` and instances of `TaskBean` which are syn
 ```java
 
 @Override
-public synchronized void **pushToRemote** (boolean overridePreference, 
-                                       boolean overwrite) {
-  try {
+public synchronized void pushToRemote (boolean overridePreference, boolean overwrite) {
+    try {
+        ArrayList<String> taskStrList = TaskIo.loadTasksStrFromFile(LocalFileTaskRepository.TODO_TXT_FILE);
+        taskApiService.clearTasks().execute();
 
-    ArrayList<String> taskStrList =
-      TaskIo.loadTasksStrFromFile*(LocalFileTaskRepository.TODO_TXT_FILE*);
+        long id = 1;
+        for (String taskStr : taskStrList) {
+            TaskBean taskBean = new TaskBean();
+            taskBean.setData(taskStr);
+            taskBean.setId(id++);
+            taskApiService.storeTask(taskBean).execute();
+        }
 
-    taskApiService.clearTasks().execute();
+        lastSync = new Date();
 
-    long id = 1;
-    for (String taskStr : taskStrList) {
-      TaskBean taskBean = new TaskBean();
-      taskBean.setData(taskStr);
-      taskBean.setId(id++);
-      taskApiService.storeTask(taskBean).execute();
+        } catch (IOException e) {
+            Log.e(EndpointsTaskBagImpl.class.getSimpleName(), 
+            "Error when storing tasks", e);
     }
-
-    lastSync = new Date();
-
-  } catch (IOException e) {
-    Log.e(EndpointsTaskBagImpl.class.getSimpleName(), 
-    "Error when storing tasks", e);
-  }
 }
-
 ```
 
 Finally, the second method reads all the tasks stored in our Google Cloud backend via a call to `taskApiService.getTasks().execute().getItems()` and writes them to local storage.
@@ -503,8 +465,7 @@ public synchronized void pullFromRemote(boolean overridePreference) {
 
    try {
       // Remote Call
-      List<TaskBean> remoteTasks =
-          taskApiService.**getTasks().execute().getItems()**;
+      List<TaskBean> remoteTasks = taskApiService.getTasks().execute().getItems();
 
       if (remoteTasks != null) {
           ArrayList<Task> taskList = new ArrayList<Task>();
@@ -516,11 +477,9 @@ public synchronized void pullFromRemote(boolean overridePreference) {
           lastSync = new Date();
        }
     } catch (IOException e) {
-        Log.*e*(EndpointsTaskBagImpl.class.getSimpleName(), 
-           "Error when loading tasks", e);
+        Log.e(EndpointsTaskBagImpl.class.getSimpleName(), "Error when loading tasks", e);
     }
 }
-
 ```
 
 Here is the full list of import statements for `EndpointsTaskBagImpl` :
@@ -536,10 +495,9 @@ import com.google.todotxt.backend.taskApi.TaskApi;
 import com.google.todotxt.backend.taskApi.model.TaskBean;
 import com.todotxt.todotxttouch.TodoPreferences;
 import com.todotxt.todotxttouch.util.TaskIo;
-
 ```
 
-Note that the entire code for `EndpointsTaskBagImpl.java` is located in the (`snippets/` directory TODO)[] of the codelab archive.
+Note that the entire code for `EndpointsTaskBagImpl.java` is located in the [`snippets/` directory TODO]() of the codelab archive.
 
 The very last step is to switch the Android client to use this subclass implementation. This is done in the `TaskBagFactory` class. Simply replace :
 
@@ -553,13 +511,15 @@ We can now run the entire architecture locally !
 
 ![image alt text](images/image_27.png)
 
-First, make sure the backend is running : select the **todoTxtBackend** module in the dropdown and run the server. Second, select the `todoTxtTouch` module and press run. If you don't have the emulator running, this should bring up this dialog :
+First, make sure the backend is running : select the **todoTxtBackend** module in the dropdown and run the server.
+
+Second, select the `todoTxtTouch` module and press run. If you don't have the emulator running, this should bring up this dialog :
 
 ![image alt text](images/image_28.png)
 
 Click OK and wait for the emulator to start.
 
-If you don't have any virtual device defined, simply bring up the AVD manager and create one with Android 4.4.2 API Level 19+.
+> If you don't have any virtual device defined, simply bring up the AVD manager and create one with Android 4.4.2 API Level 19+.
 
 Once started, you can start using the application to add tasks, mark them as completed, and delete them. Use the API Explorer (available at [http://localhost:8080/_ah/api/explorer](http://localhost:8080/_ah/api/explorer)) to invoke `getTasks()` with no parameters and make sure the tasks are indeed store in your Datastore.
 
@@ -584,14 +544,13 @@ Navigate to the `build.gradle` file at the root of the `todoTxtBackend` module a
 appcfg {
   oauth2 = true
 }
-
 ```
 
 Now open a terminal window and set the directory to the root of the project (select the top node and **Edit > Copy Path**).
 
 ![image alt text](images/image_35.png)
 
-On the command line type the following command to (build if necessary and) deploy the endpoints application to Google App Engine :
+On the command line type the following command to (build if necessary and) deploy the endpoints application to Google App Engine:
 
 ```
 $ ./gradlew todoTxtBackend:appengineUpdate
@@ -631,13 +590,11 @@ BUILD SUCCESSFUL
 Total time: 24.6 secs
 ```
 
-Once the backend is successfully deployed, you can go back to the Developers Console and check the dashboard, current application version, logs, etc.
+Once the backend is successfully deployed, you can go back to the [Developers Console](https://console.developers.google.com) and check the dashboard, current application version, logs, etc.
 
 ![image alt text](images/image_36.png)
 
-On the Android side you want to simplify the initialization of the `taskAPIService` by removing the root URL and request initializer used for testing against the local development app server.
-
-In `EndpointsTaskBagImpl.java`, this is how we create the `TaskAPI.Builder` object :
+On the Android side you want to simplify the initialization of the `taskAPIService` by removing the root URL and request initializer used for testing against the local development app server. In `EndpointsTaskBagImpl.java`, this is how we create the `TaskAPI.Builder` object :
 
 ```java
 
@@ -647,7 +604,7 @@ TaskApi.Builder builder =
 
 ```
 
-We are also required to install the Endpoints client libraries one more time to pick up the new base URL which is derived from the application name we set earlier in `appengine-web.xml`. For that, simply select **Tools > Google Cloud Tools > Install Client Libraries** once again to update the android application.
+We are also required to *install the Endpoints client libraries one more time* to pick up the new base URL which is derived from the application name we set earlier in `appengine-web.xml`. For that, simply select **Tools > Google Cloud Tools > Install Client Libraries** once again to update the android application.
 
 Run the Android client one more time and add a new task. 
 
@@ -660,12 +617,11 @@ As you can see in the screenshot above a query of `TaskBean` entities in the Clo
 ## Step 6. Improve the application!
 
 Believe it or not, this application is not quite perfect!
-
 Here are a few ideas to enhance the code and the user experience : 
 
-* Add endpoints authentication by re-using the Android logged-in user credentials and thus preventing anyone to access your endpoints. Check out this documentation : [https://developers.google.com/appengine/docs/java/endpoints/auth](https://developers.google.com/appengine/docs/java/endpoints/auth) 
-* use memcache to drastically improve performance of your application under load. See this Memcache overview: [https://developers.google.com/appengine/docs/java/memcache/](https://developers.google.com/appengine/docs/java/memcache/) 
-* Implement better sync logic with some level of incremental synchronisation.
+* Add **endpoints authentication** by re-using the Android logged-in user credentials and thus preventing anyone to access your endpoints. Check out this documentation : [https://developers.google.com/appengine/docs/java/endpoints/auth](https://developers.google.com/appengine/docs/java/endpoints/auth) 
+* Use **memcache** to drastically improve performance of your application under load. See this Memcache overview: [https://developers.google.com/appengine/docs/java/memcache/](https://developers.google.com/appengine/docs/java/memcache/) 
+* Implement **better sync logic** with some level of incremental synchronisation.
 
 You are also encouraged to use a real Android device, either through USB debugging or by generating a signed APK (In Android Studio : **Build > Generate Signed APK...**) and installing it on a phone or tablet.
 
@@ -677,9 +633,9 @@ Thanks for your time. We hope this was valuable to you!
 
 ## Appendix - Using the APIs Explorer
 
-As we will see in greater (coding) details in the last part of this lab, the communication between the Android client and the AppEngine backend is powered by [Google Cloud Endpoints](https://developers.google.com/appengine/docs/java/endpoints/). Beyond offering an easy way for the developer to expose server-side business logic as RESTful endpoints, this technology offers the ability to use the Google APIs Explorer, that same tool used to explore any of the Google APIs (Maps, Calendar, Storage, Drive, etc.), only this time for any of your APIs.
+As seen in greater (coding) details in this lab, the communication between the Android client and the AppEngine backend is powered by [Google Cloud Endpoints](https://developers.google.com/appengine/docs/java/endpoints/). Beyond offering an easy way for the developer to expose server-side business logic as RESTful endpoints, this technology offers the ability to use the Google APIs Explorer, that same tool used to explore any of the Google APIs (Maps, Calendar, Storage, Drive, etc.), only this time for any of your APIs.
 
-To explore the APIs exposed by your backend, simply point your browser to `http://<app_id>.appspot.com/_ah/api/explorer`
+To explore the APIs exposed by your backend, simply point your browser to `http://<project_id>.appspot.com/_ah/api/explorer`
 
 ![image alt text](images/image_40.png)
 
@@ -703,7 +659,7 @@ Application and server logs are available for all instances for all versions of 
 
 App Engine supports running multiple versions of your application at the same time. Version names are free-form (alphanumeric characters) and are specified in your application metadata (`appengine-web.xml` for Java apps). In our case you should see only one version which obviously is also the default version.
 
-Any version can be reached by pre-pending the version number to the URL, e.g. `http://<version>.<app_id>.appspot.com`.
+Any version can be reached by pre-pending the version number to the URL, e.g. `http://<version>.<project_id>.appspot.com`.
 
 An advanced but very useful feature of App Engine is *Traffic Splitting*. It allows to split the traffic across several versions of your app for A/B testing or rolling upgrades and is trivial to set up.
 
@@ -720,8 +676,3 @@ Finally you can configure serving the application from a custom domain, disable 
 Chances are you are not alone developing the project and this section lets you invite other participants with three role levels: Owner, Developer, and Viewer.
 
 The Google App Engine console is further documented here: [https://developers.google.com/appengine/docs/adminconsole/index](https://developers.google.com/appengine/docs/adminconsole/index)
-
-Table of Contents
-
-[[TOC]]
-
