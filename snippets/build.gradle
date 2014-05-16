@@ -1,0 +1,45 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 19
+
+        testPackageName "com.todotxt.todotxttouch.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories{
+    mavenLocal()
+}
+
+dependencies {
+    compile('com.google.todotxt.backend:taskApi:v1-1.18.0-rc-SNAPSHOT') {
+        exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
+
+    compile('com.google.http-client:google-http-client-android:1.18.0-rc') {
+        exclude(group: 'com.google.android', module: 'android')
+        exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
+
+    compile project(':chuckbjonesSwipeToDismissUndoListec6bf93')
+    compile project(':actionBarPullToRefreshextras')
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:support-v4:+'
+    compile files('libs/signpost-core-1.2.1.1.jar')
+    compile files('libs/json_simple-1.1.jar')
+    compile files('libs/libphonenumber-4.1.jar')
+    compile files('libs/signpost-commonshttp4-1.2.1.1.jar')
+    compile files('libs/apache-mime4j-0.6.jar')
+    compile files('libs/httpmime-4.0.3.jar')
+}
+

@@ -1,11 +1,8 @@
 # Android Endpoints "Todo.txt" CodeLab
 
-* * *
-
-
 *May 2014*
 
-This codelab is an introduction to Google Cloud Endpoints, the technology that enables the publication of RESTful APIs which can easily be consumed by Android applications. We will start from an existing mobile Android application and connect it to a brand new backend powered by Cloud Endpoints. All development will be done with the Android Studio IDE.
+This codelab is an introduction to Google Cloud Endpoints, the technology that enables the publication of RESTful APIs which can easily be consumed by Android applications. We will start from an existing mobile Android application and connect it to a brand new backend powered by Cloud Endpoints. All development are done with the Android Studio IDE.
 
 ## Codelab Requirements
 
@@ -18,7 +15,6 @@ This codelab is an introduction to Google Cloud Endpoints, the technology that e
             * Android 4.4.2 API Level 19+
             * Hardware Keyboard Present
             * SD Card present, 200MiB
-
     * **Android SDK Manager** (accessible from Tools>Android) configured with :
         * Android SDK Tools
         * Android SDK Build-tools 19.0.2
@@ -66,7 +62,7 @@ This IDE will also allow you to :
 
 Cloud Endpoints exposes standards based REST interfaces with built-in authorization and auto-generates strongly typed, and mobile optimized client libraries for Android, iOS and web. This is a fully supported service provided by the Google Cloud Platform with integration in Android Studio (see previous section).
 
-In Java, using `Api`, `@ApiMethod` and associated attributes enables you to decorate your business logic to expose it as RESTful APIs. Here's a simple example :
+In Java, using `@Api`, `@ApiMethod` and associated attributes enables you to decorate your business logic to expose it as RESTful APIs. Here's a simple example :
 
 ```java
 
@@ -79,7 +75,6 @@ public class MyEndpoint {
   }
 
 }
-
 ```
 
 The following HTTP request will be mapped to a call to the above `hello()` method : 
@@ -120,7 +115,7 @@ In this codelab we'll start a new backend project from scratch.
 
 ## Step 1 - Get the Android application source code
 
-The Android application source code is available in [this GitHub repository](https://github.com/GoogleCloudPlatform/endpoints-codelab-android) as a Gradle project (or alternatively from this [Zip archive](http://storage.googleapis.com/todo-codelab/TodoTxt.zip)). This is the slightly modified version of the [Todo.txt application code found on GitHub](https://github.com/ginatrapani/todo.txt-android), enough to start coding to add Google Cloud Platform as a backend.
+The Android application source code is available in [this GitHub repository](https://github.com/GoogleCloudPlatform/endpoints-codelab-android) as a Gradle project (or alternatively download it from this [Zip archive](http://storage.googleapis.com/todo-codelab/TodoTxt.zip)). This is the slightly modified version of the [Todo.txt application code found on GitHub](https://github.com/ginatrapani/todo.txt-android), enough to start coding to add Google Cloud Platform as a backend.
 
 Open Android Studio and import the code as a new project. Remember, this needs to use **Java 7**. Check the SDK Location in your **File** > **Project Structure**.
 
@@ -160,14 +155,12 @@ This creates a new backend module for this Android Studio project and adds it as
                                  ownerName = "backend.todotxt.google.com",
                                packagePath = ""))
 public class MyEndpoint {
-
         @ApiMethod(name = "sayHi")
         public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
         response.setData("Hi, " + name);
         return response;
     }
-
 }
 ```
 
@@ -239,7 +232,7 @@ This suggestion is one of a set of Endpoints-related inspections in Android Stud
 
 ![image alt text](images/image_20.png)
 
-Remove the default `sayHi()` method and add these three methods and associated annotations (you can either copy/paste from this document or use the `MyEndpoint.java` file located in the [`snippets/` directory TODO]() of the archive for this codelab) :
+Remove the default `sayHi()` method and add these three methods and associated annotations (you can either copy/paste from this document or use the `MyEndpoint.java` file located in the [`snippets/` directory](./snippets/MyEndpoint.java) of the archive for this codelab) :
 
 The following `storeTask` method will be invoked when the following HTTP request is received: `POST https://<project_id>.appspot.com/_ah/api/taskApi/v1/storeTask`
 
@@ -279,6 +272,7 @@ public List<TaskBean> getTasks() {
     Key taskBeanParentKey = KeyFactory.createKey("TaskBeanParent", "todo.txt");
     Query query = new Query(taskBeanParentKey);
     List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
+    
     ArrayList<TaskBean> taskBeans = new ArrayList<TaskBean>();
     for (Entity result : results) {
         TaskBean taskBean = new TaskBean();
@@ -304,7 +298,8 @@ public void clearTasks() {
     try {
         Key taskBeanParentKey = KeyFactory.createKey("TaskBeanParent", "todo.txt");
         Query query = new Query(taskBeanParentKey);
-        List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
+        List<Entity> results = datastoreService.prepare(query)
+            .asList(FetchOptions.Builder.withDefaults());
         for (Entity result : results) {
             datastoreService.delete(result.getKey());
         }
@@ -315,9 +310,7 @@ public void clearTasks() {
 }
 ```
 
-This method clearly does modify the server state and thus its name does not start with `get`. An HTTP POST is required to call this method. Another common RESTful request is the use of HTTP PUT but in our case we're never modifying existing data.
-
-If needed, here are the appropriate import statements for the entire endpoints class :
+This method clearly does modify the server state and thus its name does not start with `get`. An HTTP POST is required to call this method. Another common RESTful request is the use of HTTP PUT but in our case we're never modifying existing data. If needed, here are the appropriate import statements for the entire endpoints class :
 
 ```java
 
@@ -380,7 +373,7 @@ compile('com.google.http-client:google-http-client-android:1.18.0-rc') {
 }
 ```
 
-If required, the complete `build.gradle` file for `todoTxtTouch` is located in the [`snippets/` directory TODO]() of the codelab archive. Once you've made this change, you'll be prompted to perform a **"gradle sync"** :
+If required, the complete `build.gradle` file for `todoTxtTouch` is located in the [`snippets/` directory](./snippets/build.gradle) of the codelab archive. Once you've made this change, you'll be prompted to perform a **"gradle sync"** :
 
 ![image alt text](images/image_24.png)
 
@@ -390,9 +383,9 @@ At this point the Android client application is ready to start using the Endpoin
 
 Navigate to the `com/todotxt/todotxttouch/task/TaskBagImpl.java` file in the `todoTxtTouch` module (it may be one of the tabs already open) and navigate to line 215 (using **Navigate > Line** should get you to `/* REMOTE APIS */`).
 
-This is the interesting part: the `pushToRemote` and `pullToRemote` methods implement the actual communication with the backend which we want to set to use the Google Cloud Platform. Rather than making changes to this existing class we'll create a new subclass of `TaskBagImpl` called `EndpointsTaskBagImpl` (full source [here_TODO]()) :
+This is the interesting part: the `pushToRemote` and `pullToRemote` methods implement the actual communication with the backend which we want to set to use the Google Cloud Platform. Rather than making changes to this existing class we'll create a new subclass of `TaskBagImpl` called `EndpointsTaskBagImpl` (full source [here](./snippets/EndpointsTaskBagImpl.java)) :
 
-![image alt text](images/image_25.png)![image alt text](images/image_26.png)
+![image alt text](images/image_25.png)
 
 ```java
 
@@ -409,7 +402,8 @@ public class EndpointsTaskBagImpl extends TaskBagImpl {
                 .setRootUrl("http://10.0.2.2:8080/_ah/api/")
                 .setGoogleClientRequestInitializer( new GoogleClientRequestInitializer() {
                     @Override
-                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) 
+                            throws IOException {
                         abstractGoogleClientRequest.setDisableGZipContent(true);
                     }
                 }
@@ -427,16 +421,15 @@ This constructor above sets up a development environment by initializing the `Ta
 >
 > 2. replace 10.0.2.2 with LAN ip address of the laptop
 
-The other two methods for the class are the new overridden `pushToRemote` and `pullFromRemote` methods.
-
-These methods use the `taskApiService` and instances of `TaskBean` which are synchronized with the local application task repository. Here is the first method pushing local tasks to our Google Cloud backend via a simple call to `taskApiService.storeTask(taskBean).execute()`.
+The other two methods for the class are the new overridden `pushToRemote` and `pullFromRemote` methods. These methods use the `taskApiService` and instances of `TaskBean` which are synchronized with the local application task repository. Here is the first method pushing local tasks to our Google Cloud backend via a simple call to `taskApiService.storeTask(taskBean).execute()`.
 
 ```java
 
 @Override
 public synchronized void pushToRemote (boolean overridePreference, boolean overwrite) {
     try {
-        ArrayList<String> taskStrList = TaskIo.loadTasksStrFromFile(LocalFileTaskRepository.TODO_TXT_FILE);
+        ArrayList<String> taskStrList = 
+            TaskIo.loadTasksStrFromFile(LocalFileTaskRepository.TODO_TXT_FILE);
         taskApiService.clearTasks().execute();
 
         long id = 1;
@@ -497,7 +490,7 @@ import com.todotxt.todotxttouch.TodoPreferences;
 import com.todotxt.todotxttouch.util.TaskIo;
 ```
 
-Note that the entire code for `EndpointsTaskBagImpl.java` is located in the [`snippets/` directory TODO]() of the codelab archive.
+Note that the entire code for `EndpointsTaskBagImpl.java` is located in the [`snippets/` directory](./snippets/EndpointsTaskBagImpl.java) of the codelab archive.
 
 The very last step is to switch the Android client to use this subclass implementation. This is done in the `TaskBagFactory` class. Simply replace :
 
@@ -519,9 +512,9 @@ Second, select the `todoTxtTouch` module and press run. If you don't have the em
 
 Click OK and wait for the emulator to start.
 
-> If you don't have any virtual device defined, simply bring up the AVD manager and create one with Android 4.4.2 API Level 19+.
+> If you don't have any virtual device defined, simply bring up the AVD manager and create one with Android 4.4.2 API Level 19+ and SD Card present (200MB).
 
-Once started, you can start using the application to add tasks, mark them as completed, and delete them. Use the API Explorer (available at [http://localhost:8080/_ah/api/explorer](http://localhost:8080/_ah/api/explorer)) to invoke `getTasks()` with no parameters and make sure the tasks are indeed store in your Datastore.
+Once started, you can start using the application to add tasks, mark them as completed, and delete them. Use the API Explorer available at [http://localhost:8080/_ah/api/explorer](http://localhost:8080/_ah/api/explorer) to invoke `getTasks()` with no parameters and make sure tasks are indeed stored in your Datastore.
 
 ![image alt text](images/image_29.png) ![image alt text](images/image_30.png)![image alt text](images/image_31.png)
 
@@ -537,7 +530,7 @@ First, open `appengine-web.xml` and set the app id to the name you used when cre
 
 ![image alt text](images/image_34.png)
 
-Navigate to the `build.gradle` file at the root of the `todoTxtBackend` module and make sure the `appengine` section contains this authorisation attribute which will allow Gradle to propagate your Google Cloud OAuth2 credentials to deploy the backend to Google App Engine.
+Navigate to the `build.gradle` file at the root of the `todoTxtBackend` module and make sure the `appengine` section contains this authorisation attribute which will allow Gradle to propagate your Google Cloud OAuth2 credentials to deploy the backend to Google App Engine :
 
 ```Groovy
 
@@ -552,8 +545,10 @@ Now open a terminal window and set the directory to the root of the project (sel
 
 On the command line type the following command to (build if necessary and) deploy the endpoints application to Google App Engine:
 
+`$ ./gradlew todoTxtBackend:appengineUpdate`
+
 ```
-$ ./gradlew todoTxtBackend:appengineUpdate
+
 :todoTxtBackend:appengineDownloadSdk
 :todoTxtBackend:compileJava UP-TO-DATE
 ...
@@ -599,12 +594,10 @@ On the Android side you want to simplify the initialization of the `taskAPIServi
 ```java
 
 TaskApi.Builder builder =
-    new TaskApi.Builder(AndroidHttp.*newCompatibleTransport*(),
-        new AndroidJsonFactory(), null);
-
+    new TaskApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null);
 ```
 
-We are also required to *install the Endpoints client libraries one more time* to pick up the new base URL which is derived from the application name we set earlier in `appengine-web.xml`. For that, simply select **Tools > Google Cloud Tools > Install Client Libraries** once again to update the android application.
+We are also required to **install the Endpoints client libraries one more time** to pick up the new base URL which is derived from the application name we set earlier in `appengine-web.xml`. For that, simply select **Tools > Google Cloud Tools > Install Client Libraries** once again to update the android application.
 
 Run the Android client one more time and add a new task. 
 
