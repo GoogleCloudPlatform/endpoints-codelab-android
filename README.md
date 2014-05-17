@@ -66,7 +66,7 @@ Throughout the codelab, we'll use Android Studio, an open-source IDE built for A
 
 Android Studio is still in preview (version 0.5.x) as of this writing but fully functional and tested for what we're trying to do in this lab. Note we'll also be using **Java 7** as the target Java SDK for both the Android application and the App Engine Endpoint backend.
 
-This IDE will also allow you to : 
+This IDE will also allow you to :
 
 * Create Google App Engine backends right from Android Studio
 * Generate Java-specific bindings for use in our Android application
@@ -99,7 +99,7 @@ public class MyEndpoint {
 }
 ```
 
-The following HTTP request will be mapped to a call to the above `hello()` method : 
+The following HTTP request will be mapped to a call to the above `hello()` method :
 
 `HTTP GET https://<project_id>.appspot.com/_ah/api/myApi/v1/helloWorld`
 
@@ -107,7 +107,7 @@ Luckily, as we will see, the Endpoints technology comes with the ability to gene
 
 ### Overall codelab architecture
 
-As you can see on this diagram, we'll be building an [App Engine](https://developers.google.com/appengine) application which will store the user tasks in Google's [Cloud Datastore](https://developers.google.com/datastore/) and communicate with the Android application via Endpoints. 
+As you can see on this diagram, we'll be building an [App Engine](https://developers.google.com/appengine) application which will store the user tasks in Google's [Cloud Datastore](https://developers.google.com/datastore/) and communicate with the Android application via Endpoints.
 
 ![image alt text](images/image_5.png)
 
@@ -147,6 +147,8 @@ This should trigger a successful (Gradle) build :
 ![image alt text](images/image_11.png)
 
 > If the build fails, make sure you have the **Support Repository** installed (see last paragraph of [http://developer.android.com/sdk/installing/studio.html](http://developer.android.com/sdk/installing/studio.html) for details).
+
+> If you are asked to setup an Android SDK, simply click on the link and select the SDK without configuring it.
 
 From here we'll create, build and test the backend before we make our way back to the Android client to hook it up to this new backend.
 
@@ -190,7 +192,7 @@ An HTTP POST request to `myApi/v1/sayHi/Test` will be routed to the `sayHi()` me
 
 The convention here is that sending data to the endpoint implies that the server state will change and thus only POST requests will be mapped to this method. You can be explicit about which HTTP verb is used (in particular to distinguishing between a PUT and a POST) by specifying the optional `httpMethod` attribute of `@ApiMethod` (`HttpMethod.POST` in this case).
 
-All Cloud Endpoints annotations and attributes are documented here: [https://developers.google.com/appengine/docs/java/endpoints/annotations](https://developers.google.com/appengine/docs/java/endpoints/annotations) 
+All Cloud Endpoints annotations and attributes are documented here: [https://developers.google.com/appengine/docs/java/endpoints/annotations](https://developers.google.com/appengine/docs/java/endpoints/annotations)
 
 Parameter types and return values are documented here: [https://developers.google.com/appengine/docs/java/endpoints/paramreturn_types](https://developers.google.com/appengine/docs/java/endpoints/paramreturn_types)
 
@@ -226,7 +228,7 @@ At this point we have the basic Endpoints infrastructure in place but we still n
 
 Let's start with some small refactoring :
 
-1. Rename the `MyBean` class to `TaskBean` (**Refactor > Rename**) 
+1. Rename the `MyBean` class to `TaskBean` (**Refactor > Rename**)
 2. Add a `Long id` attribute to the `TaskBean` class along with getter and setter (**Code > Generate > Getter and Setter**)
 
 ![image alt text](images/image_18.png)
@@ -294,7 +296,7 @@ public List<TaskBean> getTasks() {
     Key taskBeanParentKey = KeyFactory.createKey("TaskBeanParent", "todo.txt");
     Query query = new Query(taskBeanParentKey);
     List<Entity> results = datastoreService.prepare(query).asList(FetchOptions.Builder.withDefaults());
-    
+
     ArrayList<TaskBean> taskBeans = new ArrayList<TaskBean>();
     for (Entity result : results) {
         TaskBean taskBean = new TaskBean();
@@ -368,7 +370,7 @@ This will scan the project for Cloud Endpoints artifacts (our `MyEndpoint` class
 
 ![image alt text](images/image_23.png)
 
-If you are curious, the generated code is placed in the project's `build/client-libs/taskApi-v1-java.zip` and contains the following files (the names are derived from the endpoint name) : 
+If you are curious, the generated code is placed in the project's `build/client-libs/taskApi-v1-java.zip` and contains the following files (the names are derived from the endpoint name) :
 
 ```
 taskApi/TaskApiScopes.java
@@ -419,12 +421,12 @@ public class EndpointsTaskBagImpl extends TaskBagImpl {
     // Constructor
     public EndpointsTaskBagImpl (TodoPreferences preferences, LocalTaskRepository localRepository) {
         super(preferences, localRepository, null);
-        TaskApi.Builder builder = new TaskApi.Builder(AndroidHttp.newCompatibleTransport(), 
+        TaskApi.Builder builder = new TaskApi.Builder(AndroidHttp.newCompatibleTransport(),
             new AndroidJsonFactory(), null)
                 .setRootUrl("http://10.0.2.2:8080/_ah/api/")
                 .setGoogleClientRequestInitializer( new GoogleClientRequestInitializer() {
                     @Override
-                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) 
+                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest)
                             throws IOException {
                         abstractGoogleClientRequest.setDisableGZipContent(true);
                     }
@@ -450,7 +452,7 @@ The other two methods for the class are the new overridden `pushToRemote` and `p
 @Override
 public synchronized void pushToRemote (boolean overridePreference, boolean overwrite) {
     try {
-        ArrayList<String> taskStrList = 
+        ArrayList<String> taskStrList =
             TaskIo.loadTasksStrFromFile(LocalFileTaskRepository.TODO_TXT_FILE);
         taskApiService.clearTasks().execute();
 
@@ -465,7 +467,7 @@ public synchronized void pushToRemote (boolean overridePreference, boolean overw
         lastSync = new Date();
 
         } catch (IOException e) {
-            Log.e(EndpointsTaskBagImpl.class.getSimpleName(), 
+            Log.e(EndpointsTaskBagImpl.class.getSimpleName(),
             "Error when storing tasks", e);
     }
 }
@@ -607,7 +609,10 @@ BUILD SUCCESSFUL
 Total time: 24.6 secs
 ```
 
+> If you are not yet authenticated with your project, the deploy via gradle will redirect you to a web page to set up authorization and generate a long String. This string should be pasted in the shell window (even if there is no explicit prompt). You could also use the Cloud SDK and its `gcloud auth login` command to complete the same one-time authorization.
+
 Once the backend is successfully deployed, you can go back to the [Developers Console](https://console.developers.google.com) and check the dashboard, current application version, logs, etc.
+
 
 ![image alt text](images/image_36.png)
 
@@ -621,7 +626,7 @@ TaskApi.Builder builder =
 
 We are also required to **install the Endpoints client libraries one more time** to pick up the new base URL which is derived from the application name we set earlier in `appengine-web.xml`. For that, simply select **Tools > Google Cloud Tools > Install Client Libraries** once again to update the android application.
 
-Run the Android client one more time and add a new task. 
+Run the Android client one more time and add a new task.
 
 The current synchronisation implementation will fetch tasks from local storage so unless you explicitly ask for a sync in the application menu or add a new task, the Datastore and the application will not be in sync.
 
@@ -632,19 +637,19 @@ As you can see in the screenshot above a query of `TaskBean` entities in the Clo
 ## Step 7 - Improve the application!
 
 Believe it or not, this application is not quite perfect!
-Here are a few ideas to enhance the code and the user experience : 
+Here are a few ideas to enhance the code and the user experience :
 
-* Add **endpoints authentication** by re-using the Android logged-in user credentials and thus preventing anyone to access your endpoints. Check out this documentation : [https://developers.google.com/appengine/docs/java/endpoints/auth](https://developers.google.com/appengine/docs/java/endpoints/auth) 
-* Use **memcache** to drastically improve performance of your application under load. See this Memcache overview: [https://developers.google.com/appengine/docs/java/memcache/](https://developers.google.com/appengine/docs/java/memcache/) 
+* Add **endpoints authentication** by re-using the Android logged-in user credentials and thus preventing anyone to access your endpoints. Check out this documentation : [https://developers.google.com/appengine/docs/java/endpoints/auth](https://developers.google.com/appengine/docs/java/endpoints/auth)
+* Use **memcache** to drastically improve performance of your application under load. See this Memcache overview: [https://developers.google.com/appengine/docs/java/memcache/](https://developers.google.com/appengine/docs/java/memcache/)
 * Implement **better sync logic** with some level of incremental synchronisation.
 
 You are also encouraged to use a real Android device, either through USB debugging or by generating a signed APK (In Android Studio : **Build > Generate Signed APK...**) and installing it on a phone or tablet.
 
 ![image alt text](images/image_39.png)
 
-This concludes this codelab.
+If you'd like to watch a 30-minute presentation of this entire codelab with live coding of all the steps, simply look at [this YouTube video](https://www.youtube.com/watch?v=7Sp4Lr3Qmcw) (recorded in San Francisco in Mars 2014).
 
-Thanks for your time. We hope this was valuable to you!
+This concludes this codelab : Thanks for your time and we hope this was valuable to you!
 
 ## Appendix - Using the APIs Explorer
 
