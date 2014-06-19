@@ -162,7 +162,8 @@ back to the Android client to hook it up to this new backend.
 
 ## Step 2 - Create the endpoints backend project
 
-Android Studio has built-in support for Google Cloud Endpoints.
+Android Studio has built-in support for Google Cloud Endpoints (as part of the
+IDE's support for [App Engine backend templates](https://github.com/GoogleCloudPlatform/gradle-appengine-templates))
 
 To add a backend to the current Android project, simply go to:
 **Tools > Google Cloud Tools > Add App Engine backend**
@@ -177,10 +178,12 @@ and use the following values :
 
 ![image alt text](images/image_13.png)
 
-This creates a new backend module for this Android Studio project and adds it
-as an additional dependency in the `settings.gradle` file.The generated code
-is pretty straight-forward with an object model for the data manipulated by
-the endpoint and the actual endpoint implementation :
+This creates a new backend Gradle module for our Android Studio project
+(using the [Gradle App Engine
+  Plugin](https://github.com/GoogleCloudPlatform/gradle-appengine-plugin) )
+and adds it as an additional dependency in the `settings.gradle` file. The
+generated code is pretty straight-forward with an object model for the data
+manipulated by the endpoint and the actual endpoint implementation :
 
 ![image alt text](images/image_14.png)
 
@@ -639,9 +642,10 @@ stored in your Datastore.
 
 While we've been comfortably sitting in an IDE throughout the development of
 both the client and the server sides of this codelab, everything was actually
-handled by the Gradle build tool under the covers and thus we can easily
-escape to a command-line or to another tool (such as a continuous integration
-server).
+handled by the [Gradle App Engine
+Plugin](https://github.com/GoogleCloudPlatform/gradle-appengine-plugin) under
+the covers and thus we can easily escape to a command-line or to another tool
+(such as a continuous integration server).
 
 First, open `appengine-web.xml` and set the app id to the name you used when
 creating the Google Cloud Platform project at the very beginning of this
@@ -709,10 +713,12 @@ BUILD SUCCESSFUL
 Total time: 24.6 secs
 ```
 
-> If you are not yet authenticated with your project, the deploy via gradle
+> * If you are not yet authenticated with your project, the deploy via gradle
 will redirect you to a web page to set up authorization and generate a long
 String. This string should be pasted in the shell window (even if there is no
-explicit prompt). You could also use the Cloud SDK and its `gcloud auth login`
+explicit prompt). This [page](https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints#22-deploying-the-backend-live-to-app-engine)
+has more details if needed.
+> * You could also use the Cloud SDK and its `gcloud auth login`
 command to complete the same one-time authorization.
 
 Once the backend is successfully deployed, you can go back to the
