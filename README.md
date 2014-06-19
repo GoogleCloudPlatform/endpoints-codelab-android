@@ -725,9 +725,6 @@ Once the backend is successfully deployed, you can go back to the
 [Developers Console](https://console.developers.google.com) and check the
 dashboard, current application version, logs, etc.
 
-
-![image alt text](images/image_36.png)
-
 On the Android side you want to simplify the initialization of the
 `taskAPIService` by removing the root URL and request initializer used for
 testing against the local development app server. In
@@ -792,23 +789,3 @@ Check out this world's shortest introduction to the [API Explorer](docs/APIExplo
 ## Appendix - Looking around the App Engine Console
 
 Curious about the console? Here's a super quick overview of the [App Engine Developer Console](docs/AppEngineConsole.md).
-
-##Table of Contents
-
-- [Android Endpoints "Todo.txt" CodeLab](#user-content-android-endpoints-todotxt-codelab)
-    - [Codelab Requirements](#user-content-codelab-requirements)
-    - [Introduction](#user-content-introduction)
-        - [The Todo.txt application](#user-content-the-todotxt-application)
-        - [Android Studio - the integrated tool](#user-content-android-studio---the-integrated-tool)
-        - [Google Cloud Endpoints - where the magic happens](#user-content-google-cloud-endpoints---where-the-magic-happens)
-        - [Overall codelab architecture](#user-content-overall-codelab-architecture)
-    - [Step 0 - Create your own project in the Google Developers Console](#user-content-step-0---create-your-own-project-in-the-google-developers-console)
-    - [Step 1 - Get the Android application source code](#user-content-step-1---get-the-android-application-source-code)
-    - [Step 2 - Create the endpoints backend project](#user-content-step-2---create-the-endpoints-backend-project)
-    - [Step 3 - Implement reading and writing tasks to the Datastore](#user-content-step-3---implement-reading-and-writing-tasks-to-the-datastore)
-    - [Step 4 - Install Java Client Libraries, add dependency to Android project](#user-content-step-4---install-java-client-libraries-add-dependency-to-android-project)
-    - [Step 5 - Modify the android application to use the new backend. Run. Test.](#user-content-step-5---modify-the-android-application-to-use-the-new-backend-run-test)
-    - [Step 6 - Escape to the command line and deploy to production!](#user-content-step-5-escape-to-the-command-line-and-deploy-to-production)
-    - [Step 7 - Improve the application!](#user-content-step-6-improve-the-application)
-    - [Appendix - Using the APIs Explorer](#user-content-appendix---using-the-apis-explorer)
-    - [Appendix - Looking around the App Engine Console](#user-content-appendix---looking-around-the-app-engine-console)
