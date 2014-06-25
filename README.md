@@ -73,14 +73,14 @@ Google App Engine's free tier and using
 
 ### Android Studio - the integrated tool
 
-Please read this short intro to Android Studio, the IDE used throughout the
-codelab here : [AndroidStudio.md](docs/AndroidStudio.md)
+Please read this [short intro to Android Studio](docs/AndroidStudio.md), the
+IDE used throughout the codelab.
 
 
 ### Google Cloud Endpoints - where the magic happens
 
-Please read this short intro to Google Cloud Endpoints, the key underlying
-technology for this codelab here : [CloudEndpoints.md](docs/CloudEndpoints.md)
+Please read this [short intro to Google Cloud Endpoints](docs/CloudEndpoints.md),
+the key underlying technology for this codelab.
 
 ### Overall codelab architecture
 
@@ -149,7 +149,9 @@ Open Android Studio and import the code as a new project.
 > Remember, this needs to use **Java 7**. Check the SDK Location in your
 **File** > **Project Structure**.
 
-![image alt text](images/image_9.png)![image alt text](images/image_10.png)
+![image alt text](images/image_9.png)
+
+![image alt text](images/image_10.png)
 
 This should trigger a successful (Gradle) build :
 ![image alt text](images/image_11.png)
@@ -418,7 +420,7 @@ into Entity instances with a hard-coded `"todo.txt"` key and appropriate
 attributes before they can be read from or wrote into the Cloud Datastore.
 Writing and deleting happens within the boundaries of a transaction.
 
-At this point we have a fully functional backend exposing three methods to
+At this point we have a **fully functional backend** exposing three methods to
 store, read and delete tasks in the highly-scalable Cloud Datastore, all
 through the Cloud Endpoints technology.
 
@@ -446,11 +448,11 @@ dependencies {
   ...
   compile fileTree(dir: 'libs', include: ['*.jar'])
 }
-  ```
 ```
 
 If required, the complete `build.gradle` file for `todoTxtTouch` is located in
 the [`snippets/` directory](./snippets/build.gradle) of the codelab archive.
+
 Once you've made this change, you'll be prompted to perform a **"Gradle sync"** :
 
 ![image alt text](images/image_24.png)
