@@ -24,4 +24,4 @@ backend API
 * Use App Engine-specific Gradle tooling that allows for a unified
 client/backend build
 
-![image alt text](../images/image_3.png)
+![image alt text](../images/image_3b.png)

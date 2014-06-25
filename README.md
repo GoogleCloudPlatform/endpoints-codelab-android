@@ -24,12 +24,11 @@ The original github repository for this codelab is here:
         - [Overall codelab architecture](#user-content-overall-codelab-architecture)
     - [Step 0 - Create your own project in the Google Developers Console](#user-content-step-0---create-your-own-project-in-the-google-developers-console)
     - [Step 1 - Get the Android application source code](#user-content-step-1---get-the-android-application-source-code)
-    - [Step 2 - Create the endpoints backend project](#user-content-step-2---create-the-endpoints-backend-project)
+    - [Step 2 - Create the Endpoints backend project](#user-content-step-2---create-the-endpoints-backend-project)
     - [Step 3 - Implement reading and writing tasks to the Datastore](#user-content-step-3---implement-reading-and-writing-tasks-to-the-datastore)
-    - [Step 4 - Install Java Client Libraries, add dependency to Android project](#user-content-step-4---install-java-client-libraries-add-dependency-to-android-project)
-    - [Step 5 - Modify the android application to use the new backend. Run. Test.](#user-content-step-5---modify-the-android-application-to-use-the-new-backend-run-test)
-    - [Step 6 - Escape to the command line and deploy to production!](#user-content-step-5-escape-to-the-command-line-and-deploy-to-production)
-    - [Step 7 - Improve the application!](#user-content-step-6-improve-the-application)
+    - [Step 4 - Modify the android application to use the new backend. Run. Test.](#user-content-step-4---modify-the-android-application-to-use-the-new-backend-run-test)
+    - [Step 5 - Escape to the command line and deploy to production!](#user-content-step-5-escape-to-the-command-line-and-deploy-to-production)
+    - [Step 6 - Improve the application!](#user-content-step-6-improve-the-application)
     - [Appendix - Using the APIs Explorer](#user-content-appendix---using-the-apis-explorer)
     - [Appendix - Looking around the App Engine Console](#user-content-appendix---looking-around-the-app-engine-console)
 
@@ -46,8 +45,8 @@ The original github repository for this codelab is here:
             * SD Card present, 200MiB
     * **Android SDK Manager** (accessible from Tools>Android) configured with :
         * Android SDK Tools
-        * Android SDK Build-tools 19.0.2
-        * Android SDK Platform-tools
+        * Android SDK Build-tools 19.1.0
+        * Android SDK Platform-tools 19.0.2
         * Android Support Repository
         * Android 4.0.3 (API 15+) or above
 
@@ -60,9 +59,9 @@ The original github repository for this codelab is here:
 Todo.txt is an Android application [available from the Play Store](https://play.google.com/store/apps/details?id=com.todotxt.todotxttouch)
 that stores tasks in the Cloud. It's simple to understand and use, has great
 user ratings and, best of all, is open sourced with full code available on
-github at [https://github.com/ginatrapani/todo.txt-android](https://github.com/ginatrapani/todo.txt-android).
+GitHub at [https://github.com/ginatrapani/todo.txt-android](https://github.com/ginatrapani/todo.txt-android).
 
-In this code lab we will use a single development environment (Android Studio)
+In this codelab we will use a single development environment (Android Studio)
 to build a brand new Google Cloud Platform backend to store user tasks, thus
 replacing the existing Cloud provider.
 
@@ -75,7 +74,7 @@ Google App Engine's free tier and using
 ### Android Studio - the integrated tool
 
 Please read this short intro to Android Studio, the IDE used throughout the
-codelab here : [AndroidStudio.md](docs/AndrdoiStudio.md)
+codelab here : [AndroidStudio.md](docs/AndroidStudio.md)
 
 
 ### Google Cloud Endpoints - where the magic happens
@@ -122,7 +121,7 @@ and Cloud Datastore.
 Every Google Cloud Platform project can create a free and private
 **git repository** which you're free to use in this lab but this is not a
 requirement. You can also connect your project to an existing GitHub repo.
-Both these options enable the
+Both these options can be used with
 [Push-to-Deploy](https://developers.google.com/appengine/docs/push-to-deploy)
 feature and are available from the console's "Cloud Development" menu.
 
@@ -135,14 +134,19 @@ In this codelab we'll start a new backend project from scratch.
 
 The Android application source code is available in
 [this GitHub repository](https://github.com/GoogleCloudPlatform/endpoints-codelab-android)
-as a Gradle project (or alternatively download it from this
-[Zip archive](http://storage.googleapis.com/todo-codelab/TodoTxt.zip)).
-This is the slightly modified version of the [Todo.txt application code found
-on GitHub](https://github.com/ginatrapani/todo.txt-android), enough to start
-coding to add Google Cloud Platform as a backend.
+as a Gradle project You can get the source code on your machine by running the
+following command :
 
-Open Android Studio and import the code as a new project. Remember, this
-needs to use **Java 7**. Check the SDK Location in your
+```git clone https://github.com/GoogleCloudPlatform/endpoints-codelab-android```
+
+Alternatively, you can download this [.zip archive]
+(http://storage.googleapis.com/todo-codelab/TodoTxt.zip). This is the slightly
+modified version of the [Todo.txt application code found on GitHub](https://github.com/ginatrapani/todo.txt-android),
+enough to start coding to add Google Cloud Platform as a backend.
+
+Open Android Studio and import the code as a new project.
+
+> Remember, this needs to use **Java 7**. Check the SDK Location in your
 **File** > **Project Structure**.
 
 ![image alt text](images/image_9.png)![image alt text](images/image_10.png)
@@ -160,30 +164,36 @@ From here we'll create, build and test the backend before we make our way
 back to the Android client to hook it up to this new backend.
 
 
-## Step 2 - Create the endpoints backend project
+## Step 2 - Create the Endpoints backend project
 
 Android Studio has built-in support for Google Cloud Endpoints (as part of the
 IDE's support for [App Engine backend templates](https://github.com/GoogleCloudPlatform/gradle-appengine-templates))
 
 To add a backend to the current Android project, simply go to:
-**Tools > Google Cloud Tools > Add App Engine backend**
+**File > New Module** or right-click on your "endpoints-codelab-project" in the
+Project side pane and choose **New > Module**.
+
+> You could also achieve the same thing by adding a new module to the project (File > New Module > App Engine Java Endpoints Module)
 
 ![image alt text](images/image_12.png)
 
-Make sure you select the "App Engine Java **Endpoints** Module" template
-and use the following values :
+**IMPORTANT**: Make sure you select the "App Engine Java **Endpoints** Module"
+template and enter the following values in the next screen :
 
 * Module Name: **todoTxtBackend**
 * Package Name: **com.google.todotxt.backend**
+* Client module: **todoTxtTouch (com.todotxt.todotxttouch)**
 
 ![image alt text](images/image_13.png)
 
 This creates a new backend Gradle module for our Android Studio project
 (using the [Gradle App Engine
   Plugin](https://github.com/GoogleCloudPlatform/gradle-appengine-plugin) )
-and adds it as an additional dependency in the `settings.gradle` file. The
-generated code is pretty straight-forward with an object model for the data
-manipulated by the endpoint and the actual endpoint implementation :
+and adds it as an additional dependency in the `settings.gradle` file. It
+also adds the required dependencies for the generated client libraries to the
+app's `build.gradle` file. The generated code is pretty straight-forward with
+an object model for the data manipulated by the Endpoint and the actual
+Endpoint implementation :
 
 ![image alt text](images/image_14.png)
 
@@ -205,7 +215,7 @@ public class MyEndpoint {
 An HTTP POST request to `myApi/v1/sayHi/Test` will be routed to the `sayHi()`
 method and `"Test"` will be mapped to the `name` attribute.
 
-The convention here is that sending data to the endpoint implies that the
+The convention here is that sending data to the Endpoint implies that the
 server state will change and thus only POST requests will be mapped to this
 method. You can be explicit about which HTTP verb is used (in particular to
 distinguishing between a PUT and a POST) by specifying the optional
@@ -239,14 +249,14 @@ INFO: Dev App Server is now running
 ```
 
 You can then point your browser to [http://localhost:8080](http://localhost:8080)
-to exercise the sample endpoints functionality or more interestingly go to
+to exercise the sample Endpoints functionality or more interestingly go to
 [http://localhost:8080/_ah/api/explorer](http://localhost:8080/_ah/api/explorer)
 to use the Google API Explorer tool which you may already be familiar with if
 you've used in the past any public Google API. See the
 [Appendix - Using the APIs Explorer](#user-content-appendix---using-the-apis-explorer)
 at the end of this document for further details.
 
-Once done testing the default endpoint, stop the local development app server
+Once done testing the default Endpoint, stop the local development app server
 (use the red square in the log window or **Run > Stop**).
 
 At this point we have the basic Endpoints infrastructure in place but we still
@@ -280,7 +290,7 @@ public class TaskBean {
 }
 ```
 
-In `MyEndpoint.java`, change the name of the endpoint from `"myApi"` to
+In `MyEndpoint.java`, change the name of the Endpoint from `"myApi"` to
 `"TaskApi"`. Notice how a tooltip indicates that this is not a recommended
 name (names should not be capitalized). Consequently, change it to `"taskApi"` :
 
@@ -396,6 +406,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Transaction;
+
 import java.util.ArrayList;
 import java.util.List;
 ```
@@ -413,75 +424,44 @@ through the Cloud Endpoints technology.
 
 ![image alt text](images/image_21.png)
 
-
-## Step 4 - Install Java Client Libraries, add dependency to Android project
+## Step 4 - Modify the Android application to use the new backend. Run. Test.
 
 While exposing standard RESTful interfaces makes it possible to access them
 from an Android application, the Cloud Endpoints technology is able to create
 client libraries (in our case a Java library) to enable a much easier
 implementation on the client-side with high-level abstractions such as Java
-classes rather than the underlying JSON and HTTP concepts. To generate the
-client library for our task endpoints, simply use the following menu :
-**Tools > Google Cloud Tools > Install Client Libraries**.
+classes rather than the underlying JSON and HTTP concepts.
 
-![image alt text](images/image_22.png)
+To generate these client libraries, we can simply re-build the backend by
+navigating to **Build > Make Module 'todoTxtBackend'**. Once the build
+finishes, the generated client libraries will be placed in
+`todoTxtBackend/build/libs/todoTxtBackend-endpoints-android.jar` archive.
 
-This will scan the project for Cloud Endpoints artifacts (our `MyEndpoint`
-  class here), generate the appropriate client library and install it into
-  the local maven repository, thus making them accessible to the client
-  Android application.
-
-![image alt text](images/image_23.png)
-
-If you are curious, the generated code is placed in the project's
-`build/client-libs/taskApi-v1-java.zip` and contains the following
-files (the names are derived from the endpoint name) :
-
-```
-taskApi/TaskApiScopes.java
-taskApi/model/TaskBean.java
-taskApi/model/TaskBeanCollection.java
-taskApi/TaskApi.java
-taskApi/TaskApiRequest.java
-taskApi/TaskApiRequestInitializer.java
-```
-
-We'll see in the next step how to use these classes from within the Android
-application.
-
-Next, we need to update the `todoTxtTouch` module's `build.gradle` file to
-add two dependencies - the generated `taskApi` library and the HTTP Client
-Android support library. Add these two dependencies at the top of the
-`dependencies` section of the file (make sure you do this on the module-level
-  build file, not on the project top-level `build.gradle` configuration file) :
+To start calling these libraries, let's add the following compile dependency
+to the Android client in `todoTxtTouch/build.gradle` file (if it's not already
+present) :
 
 ```groovy
-compile('com.google.todotxt.backend:taskApi:v1-1.18.0-rc-SNAPSHOT') {
-    exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
+dependencies {
+  ...
+  compile fileTree(dir: 'libs', include: ['*.jar'])
 }
-
-compile('com.google.http-client:google-http-client-android:1.18.0-rc') {
-    exclude(group: 'com.google.android', module: 'android')
-    exclude(group: 'org.apache.httpcomponents', module: 'httpclient')
-}
+  ```
 ```
 
-If required, the complete `build.gradle` file for `todoTxtTouch` is located
-in the [`snippets/` directory](./snippets/build.gradle) of the codelab archive.
-Once you've made this change, you'll be prompted to perform a **"gradle sync"** :
+If required, the complete `build.gradle` file for `todoTxtTouch` is located in
+the [`snippets/` directory](./snippets/build.gradle) of the codelab archive.
+Once you've made this change, you'll be prompted to perform a **"Gradle sync"** :
 
 ![image alt text](images/image_24.png)
 
-At this point the Android client application is ready to start using the
-Endpoints client library to store tasks in our Google Cloud backend.
-Further documentation on how to consume the Cloud Endpoints in Android is here:
-[https://developers.google.com/appengine/docs/java/endpoints/consume_android](https://developers.google.com/appengine/docs/java/endpoints/consume_android).
+When the Gradle sync finishes, your Android client application is ready to start
+using the Endpoints client library to store tasks in our Google Cloud backend.
 
-## Step 5 - Modify the android application to use the new backend. Run. Test.
-
-Navigate to the `com/todotxt/todotxttouch/task/TaskBagImpl.java` file in the
-`todoTxtTouch` module (it may be one of the tabs already open) and navigate
-to line 215 (using **Navigate > Line** should get you to `/* REMOTE APIS */`).
+Here's how we can do it. First, navigate to the
+`com/todotxt/todotxttouch/task/TaskBagImpl.java` file in the `todoTxtTouch`
+module (it may be one of the tabs already open) and navigate to line 215
+(using **Navigate > Line** should get you to `/* REMOTE APIS */`).
 
 This is the interesting part: the `pushToRemote` and `pullToRemote` methods
 implement the actual communication with the backend which we want to set to
@@ -525,13 +505,14 @@ production code is somewhat simpler.
 >
 > 1. edit the `todoTxtBackend` run configuration to listen on 0.0.0.0 (default is 127.0.0.1)
 >
-> 2. replace 10.0.2.2 with LAN ip address of the laptop
+> 2. replace 10.0.2.2 with the LAN ip address of the laptop
 
 The other two methods for the class are the new overridden `pushToRemote` and
 `pullFromRemote` methods. These methods use the `taskApiService` and instances
 of `TaskBean` which are synchronized with the local application task repository.
-Here is the first method pushing local tasks to our Google Cloud backend via a
-simple call to `taskApiService.storeTask(taskBean).execute()`.
+Here is the first method (you do not need to type this one) pushing local tasks
+to our Google Cloud backend via a simple call to
+`taskApiService.storeTask(taskBean).execute()`.
 
 ```java
 @Override
@@ -589,6 +570,7 @@ Here is the full list of import statements for `EndpointsTaskBagImpl` :
 
 ```java
 import android.util.Log;
+
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -597,6 +579,11 @@ import com.google.todotxt.backend.taskApi.TaskApi;
 import com.google.todotxt.backend.taskApi.model.TaskBean;
 import com.todotxt.todotxttouch.TodoPreferences;
 import com.todotxt.todotxttouch.util.TaskIo;
+
+import java.io.IOException;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 ```
 
 Note that the entire code for `EndpointsTaskBagImpl.java` is located in the
@@ -647,8 +634,8 @@ Plugin](https://github.com/GoogleCloudPlatform/gradle-appengine-plugin) under
 the covers and thus we can easily escape to a command-line or to another tool
 (such as a continuous integration server).
 
-First, open `appengine-web.xml` and set the app id to the name you used when
-creating the Google Cloud Platform project at the very beginning of this
+But first, open `appengine-web.xml` and set the app id to the name you used
+when creating the Google Cloud Platform project at the very beginning of this
 codelab :
 
 ![image alt text](images/image_33.png)
@@ -656,7 +643,7 @@ codelab :
 ![image alt text](images/image_34.png)
 
 Navigate to the `build.gradle` file at the root of the `todoTxtBackend` module
-and make sure the `appengine` section contains this authorisation attribute
+and make sure the `appengine` section contains this authorization attribute
 which will allow Gradle to propagate your Google Cloud OAuth2 credentials to
 deploy the backend to Google App Engine :
 
@@ -672,7 +659,7 @@ Now open a terminal window and set the directory to the root of the project
 ![image alt text](images/image_35.png)
 
 On the command line type the following command to (build if necessary and)
-deploy the endpoints application to Google App Engine:
+deploy the Endpoints backend application to Google App Engine:
 
 `$ ./gradlew todoTxtBackend:appengineUpdate`
 
@@ -725,10 +712,10 @@ Once the backend is successfully deployed, you can go back to the
 [Developers Console](https://console.developers.google.com) and check the
 dashboard, current application version, logs, etc.
 
-On the Android side you want to simplify the initialization of the
+On the Android side you can now simplify the initialization of the
 `taskAPIService` by removing the root URL and request initializer used for
 testing against the local development app server. In
-`EndpointsTaskBagImpl.java`, this is how we create the `TaskAPI.Builder`
+`EndpointsTaskBagImpl.java`, this is now how we create the `TaskAPI.Builder`
 object :
 
 ```java
@@ -736,11 +723,10 @@ TaskApi.Builder builder =
     new TaskApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null);
 ```
 
-We are also required to **install the Endpoints client libraries one more time**
-to pick up the new base URL which is derived from the application name we set
-earlier in `appengine-web.xml`. For that, simply select
-**Tools > Google Cloud Tools > Install Client Libraries** once again to update
-the android application.
+Rebuilding the Android application will pick up the changes made to the backend
+(it's no longer local to you machine but rather lives in the
+Cloud) so you don't need to explicitly re-install the Endpoints client
+libraries.
 
 Run the Android client one more time and add a new task.
 
@@ -754,13 +740,13 @@ As you can see in the screenshot above a query of `TaskBean` entities in the
 Cloud Datastore returns the list of tasks in our new Android Todo.txt
 application!
 
-## Step 7 - Improve the application!
+## Step 6 - Improve the application!
 
 Believe it or not, this application is not quite perfect!
 Here are a few ideas to enhance the code and the user experience :
 
-* Add **endpoints authentication** by re-using the Android logged-in user
-credentials and thus preventing anyone to access your endpoints. Check out
+* Add **Endpoints authentication** by re-using the Android logged-in user
+credentials and thus preventing anyone to access your Endpoints. Check out
 this documentation :
 [https://developers.google.com/appengine/docs/java/endpoints/auth](https://developers.google.com/appengine/docs/java/endpoints/auth)
 * Use **memcache** to drastically improve performance of your application
