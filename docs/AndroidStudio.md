@@ -10,10 +10,10 @@ with a layout designer and a large number of bundled static code analysis tools
 to enable one build across dev environment (IDE, command line, continuous
 integration server, etc).
 
-Android Studio is still in preview (version 0.6.x) as of this writing but it is
-fully functional and tested for what we're trying to do in this lab. Note we'll
-also be using **Java 7** as the target Java SDK for both the Android application
-and the App Engine Endpoint backend.
+Android Studio is still not a finally releases product (Beta, version 0.8.x) as
+of this writing but it is fully functional and tested for what we're trying to
+do in this lab. Note we'll also be using **Java 7** as the target Java SDK for
+both the Android application and the App Engine Endpoint backend.
 
 This IDE will also allow you to :
 
@@ -25,3 +25,8 @@ backend API
 client/backend build
 
 ![image alt text](../images/image_3b.png)
+
+> If you're a fan or dark themes, you may be interested to know that some of the
+Android Studio screenshots in this codelab have been generated with the
+built-in "Darcula" theme :
+Preferences > IDE Settings > Appearance > Theme > Darcula

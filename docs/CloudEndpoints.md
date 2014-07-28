@@ -9,9 +9,9 @@ auto-scaling and high-availability.
 
 Cloud Endpoints exposes standards based REST interfaces with built-in
 authorization and auto-generates strongly typed, and mobile optimized client
-libraries for Android, iOS and web. This is a fully supported service provided
-by the Google Cloud Platform with integration in Android Studio (see previous
-section).
+libraries for Android, iOS and JavaScript. This is a fully supported service
+provided by the Google Cloud Platform with integration in Android Studio (see
+previous section).
 
 In Java, using `@Api`, `@ApiMethod` and associated attributes enables you to
 decorate your business logic to expose it as RESTful APIs.
@@ -39,3 +39,6 @@ method :
 Luckily, as we will see, the Endpoints technology comes with the ability to
 generate Android clients to avoid having to deal with HTTP request construction
 and json response parsing.
+
+> You'll find plenty of documentation for Google Cloud Endpoints here :
+https://developers.google.com/appengine/docs/java/endpoints/

@@ -1,14 +1,14 @@
 # Android Endpoints "Todo.txt" CodeLab
 
-*Updated June 2014*
+*Updated July 2014*
 
-This codelab is an introduction to Google Cloud Endpoints, the technology that
-enables the publication of RESTful APIs which can easily be consumed by Android
-applications.
+This codelab is an introduction to **Google Cloud Endpoints**, the technology
+that enables the publication of RESTful APIs which can easily be consumed by
+Android applications.
 
-We will start from an existing mobile Android application and connect it to a
-brand new backend powered by Cloud Endpoints. All development are done with the
-Android Studio IDE.
+We will start from an **existing mobile Android application** and connect it
+to a brand **new backend powered by Cloud Endpoints**. All development are done
+with the Android Studio IDE.
 
 The original github repository for this codelab is here:
 [https://github.com/GoogleCloudPlatform/endpoints-codelab-android/](https://github.com/GoogleCloudPlatform/endpoints-codelab-android/)
@@ -37,18 +37,18 @@ The original github repository for this codelab is here:
 * A reasonably-powered laptop with plenty of RAM
     * please avoid ultrabooks! sorry, also no chromebooks ATM
 * A Java Development Kit (**JDK, not JRE**), version 7 (Java 7)
-* Latest **[Android Studio](http://developer.android.com/sdk/installing/studio.html#download)** (tested with [0.6.1](http://tools.android.com/download/studio/canary/0-6-1))
+* Latest **[Android Studio](http://developer.android.com/sdk/installing/studio.html#download)** (tested with [0.8.4](http://tools.android.com/download/studio/canary))
     * **The Android Emulator**
         * The AVD should be created with :
-            * Android 4.4.2 API Level 19+
+            * Android 4.4.x API Level 19+
             * Hardware Keyboard Present
             * SD Card present, 200MiB
-    * **Android SDK Manager** (accessible from Tools>Android) configured with :
-        * Android SDK Tools
-        * Android SDK Build-tools 19.1.0
-        * Android SDK Platform-tools 19.0.2
-        * Android Support Repository
-        * Android 4.0.3 (API 15+) or above
+    * **Android SDK Manager** (accessible from Tools > Android) configured with :
+        * Android SDK Tools (tested with 23.0.2)
+        * Android SDK Platform-tools (tested with 20)
+        * Android SDK Build-tools 19.1
+        * Android Support Repository (tested with 6)
+        * Android 4.0.3 (API 15+) or above **including "Google APIs"**
 
 ## Introduction
 
@@ -63,7 +63,7 @@ GitHub at [https://github.com/ginatrapani/todo.txt-android](https://github.com/g
 
 In this codelab we will use a single development environment (Android Studio)
 to build a brand new Google Cloud Platform backend to store user tasks, thus
-replacing the existing Cloud provider.
+replacing the application's existing Cloud provider.
 
 ![image alt text](images/image_1.png)
 
@@ -79,8 +79,18 @@ IDE used throughout the codelab.
 
 ### Google Cloud Endpoints - where the magic happens
 
-Please read this [short intro to Google Cloud Endpoints](docs/CloudEndpoints.md),
+Please read this [brief intro to Google Cloud Endpoints](docs/CloudEndpoints.md),
 the key underlying technology for this codelab.
+
+### Google Cloud Datastore - because scaling your data matters
+
+[Google Cloud DataStore](https://developers.google.com/datastore/)
+is another key technology used in this codelab and used for storing user data
+generated in the Android application once they've made it to your cloud
+application via the [Endpoints technology](./CloudEndpoints.md). This Datastore
+is a fully-managed data storage service, no need to start, stop, patch or
+administer this highly-scalable NoSQL database - it is provided to you the
+developer as a service.
 
 ### Overall codelab architecture
 
@@ -123,7 +133,7 @@ Every Google Cloud Platform project can create a free and private
 requirement. You can also connect your project to an existing GitHub repo.
 Both these options can be used with
 [Push-to-Deploy](https://developers.google.com/appengine/docs/push-to-deploy)
-feature and are available from the console's "Cloud Development" menu.
+feature and are available from the console's "Source Code > Releases" section.
 
 ![image alt text](images/image_8.png)
 
@@ -159,8 +169,10 @@ This should trigger a successful (Gradle) build :
 > * If the build fails, make sure you have the **Support Repository** installed
 (see last paragraph of [http://developer.android.com/sdk/installing/studio.html](http://developer.android.com/sdk/installing/studio.html)
 for details).
-> * If you are asked to setup an Android SDK, simply click on the link and
-select the SDK without configuring it.
+> * If you are asked to setup an Android SDK ("Project SDK is not defined"),
+simply click on the "Setup SDK" link and select the SDK without configuring it.
+Avoid for now anything above API level 19 (the Android "L preview release" is
+not fully baked yet).
 
 From here we'll create, build and test the backend before we make our way
 back to the Android client to hook it up to this new backend.
@@ -175,7 +187,8 @@ To add a backend to the current Android project, simply go to:
 **File > New Module** or right-click on your "endpoints-codelab-project" in the
 Project side pane and choose **New > Module**.
 
-> You could also achieve the same thing by adding a new module to the project (File > New Module > App Engine Java Endpoints Module)
+> You could also achieve the same thing by adding a new module to the project
+(File > New Module > App Engine Java Endpoints Module)
 
 ![image alt text](images/image_12.png)
 

@@ -22,7 +22,7 @@ Application and server logs are available for all instances for all versions
 of your application in a consolidated fashion. They are searchable, can be
 filtered by severity, date or a regular expression and are presented in the
 timezone of your choice (remember, chances are your application runs on
-  multiple datacenters possibly in different time zones).
+  multiple datacenters which can possibly be in different time zones).
 
 ## Versions
 
@@ -41,7 +41,7 @@ testing or rolling upgrades and is trivial to set up.
 ## Settings
 
 This is where you can see (and change some of) the global settings for your
-project.
+project and configure the use of custom domains.
 
 You can tune the performance of your application by using more powerful
 frontends, configuring idle instances (optional), or pending latency (also
@@ -55,9 +55,10 @@ identifier or mark the application for deletion.
 
 ## Permissions
 
-Chances are you are not alone developing the project and this section lets
-you invite other participants with three role levels: Owner, Developer, and
-Viewer.
+Chances are you are not alone developing the project. Inviting other
+participants to the project can be achieved in this section and is applicable
+to the overall Cloud Platform project. You can grant participants ownership,
+project edit or simply view permissions.
 
 The Google App Engine console is further documented here:
 [https://developers.google.com/appengine/docs/adminconsole/index](https://developers.google.com/appengine/docs/adminconsole/index)
