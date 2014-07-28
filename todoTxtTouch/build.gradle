@@ -26,7 +26,7 @@ dependencies {
     compile project(':chuckbjonesSwipeToDismissUndoListec6bf93')
     compile project(':actionBarPullToRefreshextras')
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:support-v4:20.0.0'
     compile files('libs/signpost-core-1.2.1.1.jar')
     compile files('libs/json_simple-1.1.jar')
     compile files('libs/libphonenumber-4.1.jar')

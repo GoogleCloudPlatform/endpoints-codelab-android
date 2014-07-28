@@ -12,6 +12,6 @@ android {
 
 dependencies {
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:support-v4:20.0.0'
     compile files('libs/nineoldandroids-2.4.0.jar')
 }
