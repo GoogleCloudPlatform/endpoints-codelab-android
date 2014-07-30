@@ -150,8 +150,8 @@ following command :
 ```git clone https://github.com/GoogleCloudPlatform/endpoints-codelab-android```
 
 Alternatively, you can download this [.zip archive]
-(http://storage.googleapis.com/todo-codelab/TodoTxt.zip). This is the slightly
-modified version of the [Todo.txt application code found on GitHub](https://github.com/GoogleCloudPlatform/endpoints-codelab-android/archive/master.zip),
+(https://github.com/GoogleCloudPlatform/endpoints-codelab-android/archive/master.zip). This is the slightly
+modified version of the [Todo.txt application code found on GitHub](https://github.com/ginatrapani/todo.txt-android),
 enough to start coding to add Google Cloud Platform as a backend.
 
 Open Android Studio and import the code as a new project.
