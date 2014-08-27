@@ -203,12 +203,12 @@ template and enter the following values in the next screen :
 
 This creates a new backend Gradle module for our Android Studio project
 (using the [Gradle App Engine
-  Plugin](https://github.com/GoogleCloudPlatform/gradle-appengine-plugin) )
+  Plugin](https://github.com/GoogleCloudPlatform/gradle-appengine-plugin))
 and adds it as an additional dependency in the `settings.gradle` file. It
 also adds the required dependencies for the generated client libraries to the
 app's `build.gradle` file. The generated code is pretty straight-forward with
 an object model for the data manipulated by the Endpoint and the actual
-Endpoint implementation :
+Endpoint implementation:
 
 ![image alt text](images/image_14.png)
 
@@ -218,8 +218,8 @@ Endpoint implementation :
                                  ownerName = "backend.todotxt.google.com",
                                packagePath = ""))
 public class MyEndpoint {
-        @ApiMethod(name = "sayHi")
-        public MyBean sayHi(@Named("name") String name) {
+    @ApiMethod(name = "sayHi")
+    public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
         response.setData("Hi, " + name);
         return response;
@@ -242,7 +242,7 @@ distinguishing between a PUT and a POST) by specifying the optional
 
 Without making any changes for the time being, simply start the development
 app server (a full App Engine local environment) by pressing the green
-"Play" button after selecting **todoTxtBackend** as the current module :
+"Play" button after selecting **todoTxtBackend** as the current module:
 
 ![image alt text](images/image_15.png)  ![image alt text](images/image_16.png)
 
@@ -253,7 +253,7 @@ this in :
 > * you have to build the module first to bring in all the dependencies
 (such as the App Engine SDK). Simply **Build > Make module 'todoTxtBackend'**.
 
-Once the development app server has started you should see this log message  :
+Once the development app server has started you should see this log message:
 
 ```
 INFO: Module instance default is running at http://localhost:8080/
