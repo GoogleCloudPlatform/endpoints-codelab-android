@@ -614,7 +614,7 @@ with:
 
 `return new EndpointsTaskBagImpl(sharedPreferences,localFileTaskRepository);`
 
-We can now run the entire architecture locally !
+We can now run the entire architecture locally!
 
 ![image alt text](images/image_27.png)
 
