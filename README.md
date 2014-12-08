@@ -648,11 +648,9 @@ handled under the covers by the [Gradle App Engine Plugin](https://github.com/Go
 which means we can easily escape to a command-line or to another tool (such as
 a continuous integration server).
 
-While could use the IDE's built-in Terminal (``Tools > Open Terminal...``) or
-even deploy to the Cloud straight from Android Studio (Sign-in to Google using
-the icon to the top right of the IDE and select ``Build > Deploy Module to App
-Engine..``) we are going to use an external
-terminal to deploy to App Engine.
+While we could use the IDE's built-in Terminal (``Tools > Open Terminal...``)
+or even deploy to the Cloud straight from Android Studio (full details here: [cloud.google.com/mobile/app_engine/run_test_deploy](https://cloud.google.com/mobile/app_engine/run_test_deploy))
+we are going to use an external terminal to deploy to App Engine.
 
 But first, open `appengine-web.xml` and set the Project ID to the name you used
 when creating the Google Cloud Platform project at the very beginning of this
