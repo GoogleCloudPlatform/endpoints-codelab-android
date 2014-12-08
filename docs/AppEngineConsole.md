@@ -60,8 +60,5 @@ searchable, can be filtered by severity, date or a regular expression and are
 presented in the timezone of your choice (remember, chances are your application
   runs on multiple datacenters which can possibly be in different time zones).
 
-
----
-
-The Google Developer Console is further documented here:
+> The Google Developer Console is further documented here:
 [https://developers.google.com/console/help/new/](https://developers.google.com/console/help/new/)
