@@ -127,15 +127,6 @@ project will enable you to manage all the services the Cloud Platform has to
 offer. In this lab, we'll use App Engine and Cloud Datastore and we'll create a
 **new backend project from scratch**.
 
-Every Google Cloud Platform project can create a free and private
-**git repository** which you're free to use in this lab but this is not a
-requirement. You can also connect your project to an existing GitHub repo.
-Both these options can be used with
-[Push-to-Deploy](https://cloud.google.com/tools/repo/push-to-deploy) feature
-and are available here:  ``Source Code > Releases``
-
-![image alt text](images/CloudConsoleSourceCode.png)
-
 ## Step 1 - Get the Android application source code
 
 The Android application source code is available in
