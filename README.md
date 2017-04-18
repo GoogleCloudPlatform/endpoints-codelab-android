@@ -11,7 +11,7 @@ with the [Android Studio IDE](https://developer.android.com/sdk/installing/studi
 The original github repository for this codelab is here:
 [https://github.com/GoogleCloudPlatform/endpoints-codelab-android/](https://github.com/GoogleCloudPlatform/endpoints-codelab-android/)
 
-##Table of Contents
+## Table of Contents
 
 - [Android Endpoints "Todo.txt" CodeLab](#user-content-android-endpoints-todotxt-codelab)
     - [Codelab Requirements](#user-content-codelab-requirements)
